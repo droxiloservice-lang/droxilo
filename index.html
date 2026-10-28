@@ -45,14 +45,14 @@
             opacity: 0.28;
         }
 
-        /* الهايدر العلوي النصي الفخم والمضمون للهواتف */
+        /* الهايدر العلوي: اللوجو في المنتصف وتحته الاسم بحجم صغير وأنيق */
         header {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2px;
-            padding: 12px 15px;
+            gap: 4px;
+            padding: 10px 15px;
             border-bottom: 1px solid var(--ds-border);
             background-color: rgba(10, 10, 10, 0.95);
             position: sticky;
@@ -61,19 +61,19 @@
             backdrop-filter: blur(12px);
         }
 
-        .header-brand {
-            font-size: 1.4rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: var(--ds-gold-primary);
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        .header-logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            display: block;
         }
 
-        .header-sub {
-            font-size: 0.75rem;
-            color: var(--ds-text-muted);
-            letter-spacing: 1px;
+        .logo-text {
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: var(--ds-gold-primary);
+            text-transform: uppercase;
         }
 
         .container {
@@ -287,8 +287,8 @@
     <canvas id="eyes-canvas"></canvas>
 
     <header>
-        <div class="header-brand">DROXILOSHOP</div>
-        <div class="header-sub">Official Store</div>
+        <img src="logo.png" alt="DROXILOSHOP Logo" class="header-logo-img">
+        <div class="logo-text">DROXILOSHOP</div>
     </header>
 
     <div class="container">
