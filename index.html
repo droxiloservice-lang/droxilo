@@ -31,7 +31,6 @@
             padding-bottom: 50px;
         }
 
-        /* شريط التنصيب العلوي */
         header {
             text-align: center;
             padding: 15px 20px;
@@ -57,7 +56,6 @@
             padding: 15px;
         }
 
-        /* حاوية المنتج والبطاقات */
         .hero-section {
             background-color: var(--ds-card-bg);
             border-radius: 16px;
@@ -67,29 +65,38 @@
             margin-bottom: 25px;
         }
 
-        .product-image-container {
+        /* معرض الصور الرئيسية */
+        .product-main-image {
             width: 100%;
             background-color: #1a1a1a;
-            position: relative;
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             border-bottom: 1px solid var(--ds-border);
         }
 
-        .product-image-container img {
+        .product-main-image img {
             width: 100%;
             height: auto;
             display: block;
             object-fit: cover;
         }
 
-        .image-placeholder-text {
-            color: var(--ds-text-muted);
-            text-align: center;
-            padding: 40px;
-            font-size: 0.95rem;
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--ds-border);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.03);
         }
 
         .content-padding {
@@ -116,7 +123,6 @@
             line-height: 1.4;
         }
 
-        /* قسم السعر */
         .price-box {
             background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(20,20,20,1) 100%);
             border: 2px solid var(--ds-gold);
@@ -141,7 +147,6 @@
             font-size: 0.95rem;
         }
 
-        /* النص البشري المقنع (القصة واللماذا) */
         .story-section {
             margin: 25px 0;
             background: rgba(255,255,255,0.02);
@@ -163,7 +168,6 @@
             margin-bottom: 10px;
         }
 
-        /* المميزات في شكل شبكة */
         .features-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -190,7 +194,6 @@
             font-size: 0.82rem;
         }
 
-        /* نموذج الطلب الاحترافي */
         .order-form-container {
             background: #111;
             border-radius: 12px;
@@ -266,6 +269,12 @@
             color: var(--ds-text-muted);
             font-size: 0.82rem;
         }
+
+        @media (max-width: 480px) {
+            .gallery-grid img {
+                height: 120px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -277,27 +286,30 @@
     <div class="container">
         <div class="hero-section">
             
-            <!-- مكان الصورة (يمكنك وضع رابط صورتك الحقيقية لاحقاً داخل src) -->
-            <div class="product-image-container">
-                <!-- <img src="اسم-صورة-الهودي.jpg" alt="Toji Fushiguro Oversized Hoodie"> -->
-                <div class="image-placeholder-text">
-                    🖼️ [صورة احترافية للهودي - Toji Fushiguro Oversized Hoodie]<br>
-                    <span style="font-size: 0.8rem; color: #777;">قطن ثقيل 320g - تصميم عالي الدقة</span>
-                </div>
+            <!-- الصورة الرئيسية -->
+            <div class="product-main-image">
+                <img src="lwl.jpg" alt="Toji Fushiguro Oversized Hoodie">
             </div>
 
             <div class="content-padding">
                 <span class="edition-badge">إصدار خاص ومحدود | Toji Fushiguro Edition</span>
                 <h1 class="product-title">هودي أفرسايز فخم بتصميم استثنائي يدمج بين القوة والأناقة</h1>
 
-                <!-- النص البشري المقنع -->
+                <!-- معرض باقي الصور -->
+                <div class="gallery-grid">
+                    <img src="22.jpg" alt="Toji Hoodie Detail 1">
+                    <img src="33.jpg" alt="Toji Hoodie Detail 2">
+                    <img src="44.jpg" alt="Toji Hoodie Detail 3">
+                </div>
+
+                <!-- النص المقنع -->
                 <div class="story-section">
                     <h3>لماذا ستحب ارتداء هذا الهودي؟</h3>
                     <p>إذا كنت من محبي التميز والـ Streetwear الحقيقي، فهذا الهودي مصمم خصيصاً ليمنحك إطلالة قوية ومريحة في نفس الوقت. ليس مجرد لباس، بل قطعة فنية تعكس شخصيتك بلمسة فخمة مستوحاة من أسطورة الأنمي Toji Fushiguro.</p>
                     <p>اخترناه بعناية فائقة ليكون رفيقك المثالي في الخروج، بوزن ثقيل يمنحك الدفء والمظهر الواسع (Oversized) العصري الذي تبحث عنه.</p>
                 </div>
 
-                <!-- شبكة المميزات -->
+                <!-- المميزات -->
                 <div class="features-grid">
                     <div class="feature-card">
                         <h4>قطن نقي 100%</h4>
@@ -308,7 +320,7 @@
                         <p>جودة عالية تضمن بقاء الهودي محافظاً على شكله وقوته.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>طاعة DTF احترافية</h4>
+                        <h4>طباعة DTF احترافية</h4>
                         <p>طباعة ثابتة لا تتأثر بالغسيل ولا تتشقق مع الوقت.</p>
                     </div>
                     <div class="feature-card">
@@ -317,7 +329,7 @@
                     </div>
                 </div>
 
-                <!-- السعر المميز -->
+                <!-- السعر -->
                 <div class="price-box">
                     <div class="price-amount">280 درهم فقط</div>
                     <span class="shipping-note">✓ التوصيل مجاني لجميع المدن المغربية + الدفع عند الاستلام</span>
