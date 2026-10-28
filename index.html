@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DROXILO SHOP | Toji Fushiguro Oversized Hoodie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ds-bg-core: #050505;
+            --ds-bg-surface: #101012;
+            --ds-border-subtle: rgba(212, 175, 55, 0.18);
+            --ds-gold-primary: #d4af37;
+            --ds-gold-light: #f3e5ab;
+            --ds-gold-dark: #aa8c2c;
+            --ds-text-main: #ffffff;
+            --ds-text-muted: #999999;
+            --ds-accent-whatsapp: #25D366;
+            --ds-radius-card: 20px;
+            --ds-radius-element: 12px;
+            --ds-transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--ds-bg-core);
+            color: var(--ds-text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            line-height: 1.5;
+        }
+
+        .store-wrapper {
+            width: 100%;
+            max-width: 580px;
+            background-color: var(--ds-bg-surface);
+            border: 1px solid var(--ds-border-subtle);
+            border-radius: var(--ds-radius-card);
+            padding: 2rem;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.03);
+        }
+
+        .store-header { text-align: center; margin-bottom: 1.75rem; }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ds-gold-primary), var(--ds-gold-dark));
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 0.85rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 40%, var(--ds-gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            color: var(--ds-gold-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .media-gallery { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.75rem; }
+
+        .media-frame {
+            position: relative;
+            border-radius: var(--ds-radius-element);
+            overflow: hidden;
+            border: 1px solid var(--ds-border-subtle);
+            background: #000;
+        }
+
+        .media-frame img, .media-frame video {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            transition: var(--ds-transition);
+        }
+
+        .grid-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .grid-gallery img { height: 190px; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.85rem;
+            border-radius: var(--ds-radius-element);
+            margin-bottom: 1.75rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--ds-gold-light);
+        }
+
+        .feature-item { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+        .feature-item i { font-size: 1rem; color: var(--ds-gold-primary); }
+
+        .specs-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid var(--ds-border-subtle);
+            border-right: 4px solid var(--ds-gold-primary);
+            padding: 1.25rem;
+            border-radius: var(--ds-radius-element);
+            margin-bottom: 1.75rem;
+            text-align: right;
+            font-size: 0.9rem;
+            color: #d0d0d0;
+            line-height: 1.8;
+        }
+
+        .specs-card strong { color: var(--ds-gold-light); }
+
+        .order-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--ds-border-subtle);
+            padding: 1.5rem;
+            border-radius: var(--ds-radius-element);
+            margin-bottom: 1.75rem;
+            text-align: right;
+        }
+
+        .order-form h3 {
+            color: var(--ds-gold-light);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group { margin-bottom: 1rem; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #cccccc;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: #08080a;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--ds-transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--ds-gold-primary);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .sizes-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .size-option input { display: none; }
+
+        .size-option label {
+            display: block;
+            text-align: center;
+            padding: 0.6rem 0;
+            background: #08080a;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--ds-transition);
+            margin-bottom: 0;
+        }
+
+        .size-option input:checked + label {
+            background: var(--ds-gold-primary);
+            color: #000;
+            border-color: var(--ds-gold-light);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--ds-accent-whatsapp);
+            color: #ffffff;
+            border: none;
+            padding: 1rem;
+            border-radius: var(--ds-radius-element);
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: var(--ds-transition);
+            margin-top: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+        .btn-instagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: var(--ds-radius-element);
+            font-weight: 700;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--ds-gold-primary), var(--ds-gold-dark));
+            color: #050505;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+            transition: var(--ds-transition);
+            margin-top: 0.85rem;
+        }
+
+        .btn-instagram:hover { filter: brightness(1.08); transform: translateY(-2px); }
+
+        .store-footer { margin-top: 1.5rem; text-align: center; font-size: 0.75rem; color: var(--ds-text-muted); letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <main class="store-wrapper">
+        <header class="store-header">
+            <span class="badge"><i class="fa-solid fa-fire"></i> Limited Streetwear Edition</span>
+            <h1>DROXILO SHOP</h1>
+            <p class="subtitle">Toji Fushiguro Oversized Hoodie</p>
+        </header>
+
+        <section class="media-gallery">
+            <div class="media-frame">
+                <img src="222.jpg" alt="Toji Fushiguro Back Artwork" loading="lazy">
+            </div>
+            
+            <div class="grid-gallery">
+                <div class="media-frame">
+                    <img src="LWL.jpg" alt="Toji Fushiguro Front View" loading="lazy">
+                </div>
+                <div class="media-frame">
+                    <img src="9TN.jpg" alt="Heavy Cotton Fabric Detail" loading="lazy">
+                </div>
+            </div>
+
+            <div class="media-frame">
+                <video autoplay muted loop playsinline poster="222.jpg">
+                    <source src="video.mp4" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديو.
+                </video>
+            </div>
+        </section>
+
+        <div class="features-grid">
+            <div class="feature-item"><i class="fa-solid fa-shield-halved"></i><span>قطن 100%</span></div>
+            <div class="feature-item"><i class="fa-solid fa-truck-fast"></i><span>توصيل سريع</span></div>
+            <div class="feature-item"><i class="fa-solid fa-box-check"></i><span>دفع عند الاستلام</span></div>
+        </div>
+
+        <section class="specs-card">
+            ✨ <strong>مواصفات الهودي الفاخر:</strong><br>
+            • <strong>الخامة الخارجية:</strong> قطن ثقيل عالي الجودة (320 GSM Heavy Cotton).<br>
+            • <strong>الخامة الداخلية:</strong> بطانة صوفية دافئة وناعمة جداً (Plush Fleece).<br>
+            • <strong>التصميم والطباعة:</strong> طباعة رقمية DTF عالية الثبات والتفاصيل.<br>
+            • <strong>القصّة:</strong> أوفن سايز عصري ومريح (Oversized Streetwear Fit).<br>
+            • <strong>الشحن:</strong> متوفر لجميع المدن المغربية 🇲🇦.
+        </section>
+
+        <!-- نموذج الطلب المباشر المربوط بإيميلك الشخصي -->
+        <section class="order-form">
+            <h3><i class="fa-solid fa-bag-shopping"></i> اطلب هودي Toji Fushiguro الآن</h3>
+            <form action="https://formspree.io/f/xqppbnpr" method="POST">
+                
+                <div class="form-group">
+                    <label for="fullname">الإسم الكامل:</label>
+                    <input type="text" id="fullname" name="fullname" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف:</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="07xxxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">العنوان والمدينة:</label>
+                    <input type="text" id="address" name="address" class="form-control" placeholder="المدينة، الحي، الشارع" required>
+                </div>
+
+                <div class="form-group">
+                    <label>اختر المقاس المناسب:</label>
+                    <div class="sizes-grid">
+                        <div class="size-option">
+                            <input type="radio" id="size-s" name="size" value="S">
+                            <label for="size-s">S</label>
+                        </div>
+                        <div class="size-option">
+                            <input type="radio" id="size-m" name="size" value="M">
+                            <label for="size-m">M</label>
+                        </div>
+                        <div class="size-option">
+                            <input type="radio" id="size-l" name="size" value="L" checked>
+                            <label for="size-l">L</label>
+                        </div>
+                        <div class="size-option">
+                            <input type="radio" id="size-xl" name="size" value="XL">
+                            <label for="size-xl">XL</label>
+                        </div>
+                        <div class="size-option">
+                            <input type="radio" id="size-xxl" name="size" value="XXL">
+                            <label for="size-xxl">XXL</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fa-solid fa-paper-plane fa-lg"></i> إرسال طلب الشراء فوراً
+                </button>
+            </form>
+        </section>
+
+        <nav class="action-stack">
+            <a href="https://instagram.com/DroxiloShop" class="btn-instagram" target="_blank" rel="noopener">
+                <i class="fa-brands fa-instagram fa-lg"></i> تابعنا على إنستاغرام
+            </a>
+        </nav>
+
+        <footer class="store-footer">
+            <p>&copy; 2026 DROXILO SHOP. ALL RIGHTS RESERVED.</p>
+        </footer>
+    </main>
+
+</body>
+</html>
