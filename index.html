@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ds-black: #0a0a0a;
+            --ds-black: #0b0b0b;
             --ds-card-bg: #141414;
-            --ds-gold-primary: #d4af37;
-            --ds-gold-hover: #f3e5ab;
+            --ds-gold: #d4af37;
+            --ds-gold-light: #f3e5ab;
             --ds-text: #ffffff;
             --ds-text-muted: #a0a0a0;
             --ds-green: #2ecc71;
-            --ds-border: rgba(212, 175, 55, 0.2);
+            --ds-border: rgba(212, 175, 55, 0.25);
         }
 
         * {
@@ -27,15 +27,16 @@
         body {
             background-color: var(--ds-black);
             color: var(--ds-text);
-            line-height: 1.6;
-            padding-bottom: 40px;
+            line-height: 1.7;
+            padding-bottom: 50px;
         }
 
+        /* شريط التنصيب العلوي */
         header {
             text-align: center;
-            padding: 20px;
+            padding: 15px 20px;
             border-bottom: 1px solid var(--ds-border);
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(10,10,10,0.9);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -43,98 +44,172 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 900;
             letter-spacing: 2px;
-            color: var(--ds-gold-primary);
+            color: var(--ds-gold);
             text-transform: uppercase;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
 
-        .product-card {
+        /* حاوية المنتج والبطاقات */
+        .hero-section {
             background-color: var(--ds-card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             border: 1px solid var(--ds-border);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             margin-bottom: 25px;
         }
 
-        .product-image {
+        .product-image-container {
             width: 100%;
-            height: auto;
-            display: block;
+            background-color: #1a1a1a;
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-bottom: 1px solid var(--ds-border);
         }
 
-        .product-details {
-            padding: 20px;
+        .product-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .image-placeholder-text {
+            color: var(--ds-text-muted);
+            text-align: center;
+            padding: 40px;
+            font-size: 0.95rem;
+        }
+
+        .content-padding {
+            padding: 25px 20px;
+        }
+
+        .edition-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--ds-gold);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border: 1px solid var(--ds-border);
+        }
+
+        h1.product-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            color: var(--ds-text);
+            line-height: 1.4;
+        }
+
+        /* قسم السعر */
+        .price-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(20,20,20,1) 100%);
+            border: 2px solid var(--ds-gold);
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
             text-align: center;
         }
 
-        .product-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: var(--ds-text);
-        }
-
-        .product-subtitle {
-            color: var(--ds-gold-primary);
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .price-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed var(--ds-gold-primary);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-
         .price-amount {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 900;
-            color: var(--ds-gold-primary);
+            color: var(--ds-gold);
+            line-height: 1;
         }
 
-        .shipping-badge {
-            display: inline-block;
-            margin-top: 5px;
+        .shipping-note {
+            display: block;
+            margin-top: 8px;
             color: var(--ds-green);
             font-weight: 700;
             font-size: 0.95rem;
         }
 
-        .badge-list {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 15px 0;
-            font-size: 0.85rem;
-            color: var(--ds-text-muted);
+        /* النص البشري المقنع (القصة واللماذا) */
+        .story-section {
+            margin: 25px 0;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            padding: 20px;
+            border-right: 4px solid var(--ds-gold);
         }
 
-        .badge-item {
-            background: rgba(255,255,255,0.05);
-            padding: 5px 12px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+        .story-section h3 {
+            font-size: 1.1rem;
+            color: var(--ds-gold);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .story-section p {
+            color: #d0d0d0;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        /* المميزات في شكل شبكة */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.04);
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .feature-card h4 {
+            color: var(--ds-gold);
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--ds-text-muted);
+            font-size: 0.82rem;
+        }
+
+        /* نموذج الطلب الاحترافي */
+        .order-form-container {
+            background: #111;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--ds-border);
+            margin-top: 25px;
+        }
+
+        .order-form-container h3 {
+            text-align: center;
+            font-size: 1.25rem;
+            margin-bottom: 18px;
+            color: var(--ds-text);
         }
 
         form {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            text-align: right;
         }
 
         .form-group {
@@ -144,17 +219,17 @@
         }
 
         label {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 700;
             color: var(--ds-text);
         }
 
         input, select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 13px 15px;
             border-radius: 8px;
             border: 1px solid rgba(255,255,255,0.15);
-            background-color: #0d0d0d;
+            background-color: #080808;
             color: #fff;
             font-size: 1rem;
             outline: none;
@@ -162,25 +237,26 @@
         }
 
         input:focus, select:focus {
-            border-color: var(--ds-gold-primary);
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+            border-color: var(--ds-gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
         }
 
         .btn-submit {
-            background-color: var(--ds-gold-primary);
+            background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
             color: #000;
-            font-size: 1.2rem;
-            font-weight: 800;
-            padding: 15px;
+            font-size: 1.15rem;
+            font-weight: 900;
+            padding: 16px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: 0.3s ease;
             margin-top: 10px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
         }
 
         .btn-submit:hover {
-            background-color: var(--ds-gold-hover);
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
             transform: translateY(-2px);
         }
 
@@ -188,7 +264,7 @@
             text-align: center;
             margin-top: 30px;
             color: var(--ds-text-muted);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
         }
     </style>
 </head>
@@ -199,62 +275,98 @@
     </header>
 
     <div class="container">
-        <div class="product-card">
-            <!-- يمكنك وضع مسار صورتك هنا لاحقاً -->
-            <div class="product-details">
-                <div class="product-subtitle">EDITION LIMITÉE | Toji Fushiguro</div>
-                <h1 class="product-title">Oversized Hoodie 320g - Washed Black</h1>
-                
-                <div class="badge-list">
-                    <span class="badge-item">100% Coton</span>
-                    <span class="badge-item">Coupe Oversized</span>
-                    <span class="badge-item">DTF Print Haute Qualité</span>
+        <div class="hero-section">
+            
+            <!-- مكان الصورة (يمكنك وضع رابط صورتك الحقيقية لاحقاً داخل src) -->
+            <div class="product-image-container">
+                <!-- <img src="اسم-صورة-الهودي.jpg" alt="Toji Fushiguro Oversized Hoodie"> -->
+                <div class="image-placeholder-text">
+                    🖼️ [صورة احترافية للهودي - Toji Fushiguro Oversized Hoodie]<br>
+                    <span style="font-size: 0.8rem; color: #777;">قطن ثقيل 320g - تصميم عالي الدقة</span>
+                </div>
+            </div>
+
+            <div class="content-padding">
+                <span class="edition-badge">إصدار خاص ومحدود | Toji Fushiguro Edition</span>
+                <h1 class="product-title">هودي أفرسايز فخم بتصميم استثنائي يدمج بين القوة والأناقة</h1>
+
+                <!-- النص البشري المقنع -->
+                <div class="story-section">
+                    <h3>لماذا ستحب ارتداء هذا الهودي؟</h3>
+                    <p>إذا كنت من محبي التميز والـ Streetwear الحقيقي، فهذا الهودي مصمم خصيصاً ليمنحك إطلالة قوية ومريحة في نفس الوقت. ليس مجرد لباس، بل قطعة فنية تعكس شخصيتك بلمسة فخمة مستوحاة من أسطورة الأنمي Toji Fushiguro.</p>
+                    <p>اخترناه بعناية فائقة ليكون رفيقك المثالي في الخروج، بوزن ثقيل يمنحك الدفء والمظهر الواسع (Oversized) العصري الذي تبحث عنه.</p>
                 </div>
 
+                <!-- شبكة المميزات -->
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>قطن نقي 100%</h4>
+                        <p>ملمس ناعم جداً على الجلد ومريح طوال اليوم.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>وزن ثقيل 320g</h4>
+                        <p>جودة عالية تضمن بقاء الهودي محافظاً على شكله وقوته.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>طاعة DTF احترافية</h4>
+                        <p>طباعة ثابتة لا تتأثر بالغسيل ولا تتشقق مع الوقت.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>قصة الأفرسايز العصرية</h4>
+                        <p>راحة مطلقة ومظهر أنيق يواكب صيحات الموضة العالمية.</p>
+                    </div>
+                </div>
+
+                <!-- السعر المميز -->
                 <div class="price-box">
-                    <div class="price-amount">280 DH</div>
-                    <div class="shipping-badge">✓ التوصيل مجاني لجميع المدن المغربية والدفع عند الاستلام</div>
+                    <div class="price-amount">280 درهم فقط</div>
+                    <span class="shipping-note">✓ التوصيل مجاني لجميع المدن المغربية + الدفع عند الاستلام</span>
                 </div>
 
-                <form action="https://formspree.io/f/xqppbnpr" method="POST">
-                    <div class="form-group">
-                        <label for="fullname">الاسم الكامل:</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="أدخل اسمك الكامل" required>
-                    </div>
+                <!-- نموذج الطلب -->
+                <div class="order-form-container">
+                    <h3>اطلب نسختك الآن (الكمية محدودة)</h3>
+                    <form action="https://formspree.io/f/xqppbnpr" method="POST">
+                        <div class="form-group">
+                            <label for="fullname">الاسم الكامل:</label>
+                            <input type="text" id="fullname" name="fullname" placeholder="اكتب اسمك الكامل هنا" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="phone">رقم الهاتف (الواتساب):</label>
-                        <input type="tel" id="phone" name="phone" placeholder="06XXXXXXXX" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف (للتواصل عبر الواتساب أو الاتصال):</label>
+                            <input type="tel" id="phone" name="phone" placeholder="مثال: 0612345678" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="city">المدينة:</label>
-                        <input type="text" id="city" name="city" placeholder="مدينتك" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="city">المدينة:</label>
+                            <input type="text" id="city" name="city" placeholder="مدينتك (مثل: وجدة، الدار البيضاء...)" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="address">العنوان الكامل:</label>
-                        <input type="text" id="address" name="address" placeholder="الحي / الشارع / رقم المنزل" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="address">العنوان بالتفصيل:</label>
+                            <input type="text" id="address" name="address" placeholder="الحي، الشارع، ورقم المنزل" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="size">المقاس (Taille):</label>
-                        <select id="size" name="size" required>
-                            <option value="" disabled selected>اختر المقاس المناسب</option>
-                            <option value="S">S - Small</option>
-                            <option value="M">M - Medium</option>
-                            <option value="L">L - Large</option>
-                            <option value="XL">XL - Extra Large</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label for="size">اختر المقاس المناسب (Taille):</label>
+                            <select id="size" name="size" required>
+                                <option value="" disabled selected>-- اختر المقاس --</option>
+                                <option value="S">S (Small)</option>
+                                <option value="M">M (Medium)</option>
+                                <option value="L">L (Large)</option>
+                                <option value="XL">XL (Extra Large)</option>
+                            </select>
+                        </div>
 
-                    <button type="submit" class="btn-submit">تأكيد الطلب الآن</button>
-                </form>
+                        <button type="submit" class="btn-submit">تأكيد طلب الهودي الآن 🚀</button>
+                    </form>
+                </div>
+
             </div>
         </div>
 
         <footer>
-            <p>© 2026 DROXILO SHOP. All rights reserved.</p>
+            <p>© 2026 DROXILO SHOP. جميع الحقوق محفوظة.</p>
         </footer>
     </div>
 
