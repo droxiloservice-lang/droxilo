@@ -45,14 +45,14 @@
             opacity: 0.28;
         }
 
-        /* الهايدر العلوي: اللوجو في المنتصف وتحته الاسم بحجم صغير وأنيق */
+        /* الهايدر الصغير والأنيق جداً مع ضبط أبعاد اللوجو بدقة */
         header {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            padding: 10px 15px;
+            gap: 2px;
+            padding: 6px 15px;
             border-bottom: 1px solid var(--ds-border);
             background-color: rgba(10, 10, 10, 0.95);
             position: sticky;
@@ -62,16 +62,16 @@
         }
 
         .header-logo-img {
-            height: 40px;
-            width: auto;
+            width: 42px;
+            height: 37px; /* متوافقة تماماً مع أبعاد 153x135 */
             object-fit: contain;
             display: block;
         }
 
         .logo-text {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 900;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             color: var(--ds-gold-primary);
             text-transform: uppercase;
         }
@@ -287,7 +287,7 @@
     <canvas id="eyes-canvas"></canvas>
 
     <header>
-        <img src="logo.png" alt="DROXILOSHOP Logo" class="header-logo-img">
+        <img src="LOGO.png" alt="DROXILOSHOP Logo" class="header-logo-img">
         <div class="logo-text">DROXILOSHOP</div>
     </header>
 
