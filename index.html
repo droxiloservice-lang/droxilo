@@ -4,360 +4,259 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DROXILO SHOP | Toji Fushiguro Oversized Hoodie</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ds-bg-core: #050505;
-            --ds-bg-surface: #101012;
-            --ds-border-subtle: rgba(212, 175, 55, 0.18);
+            --ds-black: #0a0a0a;
+            --ds-card-bg: #141414;
             --ds-gold-primary: #d4af37;
-            --ds-gold-light: #f3e5ab;
-            --ds-gold-dark: #aa8c2c;
-            --ds-text-main: #ffffff;
-            --ds-text-muted: #999999;
-            --ds-accent-whatsapp: #25D366;
-            --ds-radius-card: 20px;
-            --ds-radius-element: 12px;
-            --ds-transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --ds-gold-hover: #f3e5ab;
+            --ds-text: #ffffff;
+            --ds-text-muted: #a0a0a0;
+            --ds-green: #2ecc71;
+            --ds-border: rgba(212, 175, 55, 0.2);
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
 
         body {
-            background-color: var(--ds-bg-core);
-            color: var(--ds-text-main);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            line-height: 1.5;
+            background-color: var(--ds-black);
+            color: var(--ds-text);
+            line-height: 1.6;
+            padding-bottom: 40px;
         }
 
-        .store-wrapper {
-            width: 100%;
-            max-width: 580px;
-            background-color: var(--ds-bg-surface);
-            border: 1px solid var(--ds-border-subtle);
-            border-radius: var(--ds-radius-card);
-            padding: 2rem;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.03);
+        header {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--ds-border);
+            background-color: rgba(0,0,0,0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
-        .store-header { text-align: center; margin-bottom: 1.75rem; }
-
-        .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--ds-gold-primary), var(--ds-gold-dark));
-            color: #000;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 1.2px;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--ds-gold-primary);
             text-transform: uppercase;
-            padding: 0.35rem 1rem;
-            border-radius: 50px;
-            margin-bottom: 0.85rem;
         }
 
-        h1 {
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product-card {
+            background-color: var(--ds-card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--ds-border);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid var(--ds-border);
+        }
+
+        .product-details {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--ds-text);
+        }
+
+        .product-subtitle {
+            color: var(--ds-gold-primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .price-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed var(--ds-gold-primary);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .price-amount {
             font-size: 2rem;
             font-weight: 900;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #ffffff 40%, var(--ds-gold-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.25rem;
-        }
-
-        .subtitle {
             color: var(--ds-gold-primary);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
         }
 
-        .media-gallery { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.75rem; }
-
-        .media-frame {
-            position: relative;
-            border-radius: var(--ds-radius-element);
-            overflow: hidden;
-            border: 1px solid var(--ds-border-subtle);
-            background: #000;
-        }
-
-        .media-frame img, .media-frame video {
-            width: 100%;
-            display: block;
-            object-fit: cover;
-            transition: var(--ds-transition);
-        }
-
-        .grid-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        .grid-gallery img { height: 190px; }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 0.85rem;
-            border-radius: var(--ds-radius-element);
-            margin-bottom: 1.75rem;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--ds-gold-light);
-        }
-
-        .feature-item { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
-        .feature-item i { font-size: 1rem; color: var(--ds-gold-primary); }
-
-        .specs-card {
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid var(--ds-border-subtle);
-            border-right: 4px solid var(--ds-gold-primary);
-            padding: 1.25rem;
-            border-radius: var(--ds-radius-element);
-            margin-bottom: 1.75rem;
-            text-align: right;
-            font-size: 0.9rem;
-            color: #d0d0d0;
-            line-height: 1.8;
-        }
-
-        .specs-card strong { color: var(--ds-gold-light); }
-
-        .order-form {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--ds-border-subtle);
-            padding: 1.5rem;
-            border-radius: var(--ds-radius-element);
-            margin-bottom: 1.75rem;
-            text-align: right;
-        }
-
-        .order-form h3 {
-            color: var(--ds-gold-light);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-group { margin-bottom: 1rem; }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: #cccccc;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            background: #08080a;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 8px;
-            color: #fff;
+        .shipping-badge {
+            display: inline-block;
+            margin-top: 5px;
+            color: var(--ds-green);
+            font-weight: 700;
             font-size: 0.95rem;
-            outline: none;
-            transition: var(--ds-transition);
         }
 
-        .form-control:focus {
-            border-color: var(--ds-gold-primary);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        .badge-list {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            color: var(--ds-text-muted);
         }
 
-        .sizes-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+        .badge-item {
+            background: rgba(255,255,255,0.05);
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: right;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
             gap: 6px;
         }
 
-        .size-option input { display: none; }
-
-        .size-option label {
-            display: block;
-            text-align: center;
-            padding: 0.6rem 0;
-            background: #08080a;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 6px;
-            color: #fff;
-            font-weight: bold;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: var(--ds-transition);
-            margin-bottom: 0;
+        label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--ds-text);
         }
 
-        .size-option input:checked + label {
-            background: var(--ds-gold-primary);
-            color: #000;
-            border-color: var(--ds-gold-light);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background-color: #0d0d0d;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--ds-gold-primary);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
         }
 
         .btn-submit {
-            width: 100%;
-            background-color: var(--ds-accent-whatsapp);
-            color: #ffffff;
+            background-color: var(--ds-gold-primary);
+            color: #000;
+            font-size: 1.2rem;
+            font-weight: 800;
+            padding: 15px;
             border: none;
-            padding: 1rem;
-            border-radius: var(--ds-radius-element);
-            font-weight: 700;
-            font-size: 1.05rem;
+            border-radius: 8px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
-            transition: var(--ds-transition);
-            margin-top: 1.2rem;
-            text-transform: uppercase;
+            transition: 0.3s ease;
+            margin-top: 10px;
         }
 
-        .btn-submit:hover { filter: brightness(1.1); transform: translateY(-2px); }
-
-        .btn-instagram {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            padding: 1rem;
-            border-radius: var(--ds-radius-element);
-            font-weight: 700;
-            font-size: 1rem;
-            background: linear-gradient(135deg, var(--ds-gold-primary), var(--ds-gold-dark));
-            color: #050505;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
-            transition: var(--ds-transition);
-            margin-top: 0.85rem;
+        .btn-submit:hover {
+            background-color: var(--ds-gold-hover);
+            transform: translateY(-2px);
         }
 
-        .btn-instagram:hover { filter: brightness(1.08); transform: translateY(-2px); }
-
-        .store-footer { margin-top: 1.5rem; text-align: center; font-size: 0.75rem; color: var(--ds-text-muted); letter-spacing: 1px; }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--ds-text-muted);
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
 
-    <main class="store-wrapper">
-        <header class="store-header">
-            <span class="badge"><i class="fa-solid fa-fire"></i> Limited Streetwear Edition</span>
-            <h1>DROXILO SHOP</h1>
-            <p class="subtitle">Toji Fushiguro Oversized Hoodie</p>
-        </header>
+    <header>
+        <div class="logo">DROXILO SHOP</div>
+    </header>
 
-        <section class="media-gallery">
-            <div class="media-frame">
-                <img src="222.jpg" alt="Toji Fushiguro Back Artwork" loading="lazy">
-            </div>
-            
-            <div class="grid-gallery">
-                <div class="media-frame">
-                    <img src="LWL.jpg" alt="Toji Fushiguro Front View" loading="lazy">
+    <div class="container">
+        <div class="product-card">
+            <!-- يمكنك وضع مسار صورتك هنا لاحقاً -->
+            <div class="product-details">
+                <div class="product-subtitle">EDITION LIMITÉE | Toji Fushiguro</div>
+                <h1 class="product-title">Oversized Hoodie 320g - Washed Black</h1>
+                
+                <div class="badge-list">
+                    <span class="badge-item">100% Coton</span>
+                    <span class="badge-item">Coupe Oversized</span>
+                    <span class="badge-item">DTF Print Haute Qualité</span>
                 </div>
-                <div class="media-frame">
-                    <img src="9TN.jpg" alt="Heavy Cotton Fabric Detail" loading="lazy">
+
+                <div class="price-box">
+                    <div class="price-amount">280 DH</div>
+                    <div class="shipping-badge">✓ التوصيل مجاني لجميع المدن المغربية والدفع عند الاستلام</div>
                 </div>
-            </div>
 
-            <div class="media-frame">
-                <video autoplay muted loop playsinline poster="222.jpg">
-                    <source src="video.mp4" type="video/mp4">
-                    متصفحك لا يدعم تشغيل الفيديو.
-                </video>
-            </div>
-        </section>
+                <form action="https://formspree.io/f/xqppbnpr" method="POST">
+                    <div class="form-group">
+                        <label for="fullname">الاسم الكامل:</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="أدخل اسمك الكامل" required>
+                    </div>
 
-        <div class="features-grid">
-            <div class="feature-item"><i class="fa-solid fa-shield-halved"></i><span>قطن 100%</span></div>
-            <div class="feature-item"><i class="fa-solid fa-truck-fast"></i><span>توصيل سريع</span></div>
-            <div class="feature-item"><i class="fa-solid fa-box-check"></i><span>دفع عند الاستلام</span></div>
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف (الواتساب):</label>
+                        <input type="tel" id="phone" name="phone" placeholder="06XXXXXXXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">المدينة:</label>
+                        <input type="text" id="city" name="city" placeholder="مدينتك" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">العنوان الكامل:</label>
+                        <input type="text" id="address" name="address" placeholder="الحي / الشارع / رقم المنزل" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="size">المقاس (Taille):</label>
+                        <select id="size" name="size" required>
+                            <option value="" disabled selected>اختر المقاس المناسب</option>
+                            <option value="S">S - Small</option>
+                            <option value="M">M - Medium</option>
+                            <option value="L">L - Large</option>
+                            <option value="XL">XL - Extra Large</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">تأكيد الطلب الآن</button>
+                </form>
+            </div>
         </div>
 
-        <section class="specs-card">
-            ✨ <strong>مواصفات الهودي الفاخر:</strong><br>
-            • <strong>الخامة الخارجية:</strong> قطن ثقيل عالي الجودة (320 GSM Heavy Cotton).<br>
-            • <strong>الخامة الداخلية:</strong> بطانة صوفية دافئة وناعمة جداً (Plush Fleece).<br>
-            • <strong>التصميم والطباعة:</strong> طباعة رقمية DTF عالية الثبات والتفاصيل.<br>
-            • <strong>القصّة:</strong> أوفن سايز عصري ومريح (Oversized Streetwear Fit).<br>
-            • <strong>الشحن:</strong> متوفر لجميع المدن المغربية 🇲🇦.
-        </section>
-
-        <!-- نموذج الطلب المباشر المربوط بإيميلك الشخصي -->
-        <section class="order-form">
-            <h3><i class="fa-solid fa-bag-shopping"></i> اطلب هودي Toji Fushiguro الآن</h3>
-            <form action="https://formspree.io/f/xqppbnpr" method="POST">
-                
-                <div class="form-group">
-                    <label for="fullname">الإسم الكامل:</label>
-                    <input type="text" id="fullname" name="fullname" class="form-control" placeholder="أدخل اسمك الكامل" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">رقم الهاتف:</label>
-                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="07xxxxxxxx" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="address">العنوان والمدينة:</label>
-                    <input type="text" id="address" name="address" class="form-control" placeholder="المدينة، الحي، الشارع" required>
-                </div>
-
-                <div class="form-group">
-                    <label>اختر المقاس المناسب:</label>
-                    <div class="sizes-grid">
-                        <div class="size-option">
-                            <input type="radio" id="size-s" name="size" value="S">
-                            <label for="size-s">S</label>
-                        </div>
-                        <div class="size-option">
-                            <input type="radio" id="size-m" name="size" value="M">
-                            <label for="size-m">M</label>
-                        </div>
-                        <div class="size-option">
-                            <input type="radio" id="size-l" name="size" value="L" checked>
-                            <label for="size-l">L</label>
-                        </div>
-                        <div class="size-option">
-                            <input type="radio" id="size-xl" name="size" value="XL">
-                            <label for="size-xl">XL</label>
-                        </div>
-                        <div class="size-option">
-                            <input type="radio" id="size-xxl" name="size" value="XXL">
-                            <label for="size-xxl">XXL</label>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-submit">
-                    <i class="fa-solid fa-paper-plane fa-lg"></i> إرسال طلب الشراء فوراً
-                </button>
-            </form>
-        </section>
-
-        <nav class="action-stack">
-            <a href="https://instagram.com/DroxiloShop" class="btn-instagram" target="_blank" rel="noopener">
-                <i class="fa-brands fa-instagram fa-lg"></i> تابعنا على إنستاغرام
-            </a>
-        </nav>
-
-        <footer class="store-footer">
-            <p>&copy; 2026 DROXILO SHOP. ALL RIGHTS RESERVED.</p>
+        <footer>
+            <p>© 2026 DROXILO SHOP. All rights reserved.</p>
         </footer>
-    </main>
+    </div>
 
 </body>
 </html>
