@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DROXILO SHOP | Toji Fushiguro Oversized Hoodie</title>
+    <title>DROXILOSHOP | Toji Fushiguro Oversized Hoodie</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --ds-black: #0a0a0a;
-            --ds-card-bg: #141414;
+            --ds-card-bg: rgba(20, 20, 20, 0.92);
             --ds-gold-primary: #d4af37;
             --ds-gold-hover: #f3e5ab;
             --ds-text: #ffffff;
             --ds-text-muted: #a0a0a0;
             --ds-green: #2ecc71;
-            --ds-border: rgba(212, 175, 55, 0.2);
+            --ds-border: rgba(212, 175, 55, 0.25);
         }
 
         * {
@@ -29,21 +29,45 @@
             color: var(--ds-text);
             line-height: 1.6;
             padding-bottom: 40px;
+            position: relative;
+            overflow-x: hidden;
         }
 
+        /* خلفية تساقط العيون */
+        #eyes-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.35;
+        }
+
+        /* الهايدر العلوي */
         header {
-            text-align: center;
-            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px 20px;
             border-bottom: 1px solid var(--ds-border);
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(10, 10, 10, 0.85);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
-        .logo {
-            font-size: 1.8rem;
+        .header-logo-img {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
             font-weight: 900;
             letter-spacing: 2px;
             color: var(--ds-gold-primary);
@@ -51,17 +75,20 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 620px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 15px;
+            position: relative;
+            z-index: 1;
         }
 
         .product-card {
             background-color: var(--ds-card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             border: 1px solid var(--ds-border);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
             margin-bottom: 25px;
         }
 
@@ -91,10 +118,15 @@
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid var(--ds-border);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.02);
         }
 
         .product-details {
-            padding: 20px;
+            padding: 22px;
             text-align: center;
         }
 
@@ -112,6 +144,18 @@
             margin-bottom: 15px;
         }
 
+        /* قصة المنتج بأسلوب بشري */
+        .story-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 3px solid var(--ds-gold-primary);
+            padding: 15px;
+            border-radius: 6px;
+            text-align: right;
+            margin: 18px 0;
+            font-size: 0.92rem;
+            color: #dcdcdc;
+        }
+
         .badge-list {
             display: flex;
             justify-content: center;
@@ -123,22 +167,22 @@
         }
 
         .badge-item {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             padding: 5px 12px;
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .price-box {
             background: rgba(255, 255, 255, 0.03);
             border: 1px dashed var(--ds-gold-primary);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 16px;
             margin: 20px 0;
         }
 
         .price-amount {
-            font-size: 2rem;
+            font-size: 2.1rem;
             font-weight: 900;
             color: var(--ds-gold-primary);
         }
@@ -151,6 +195,7 @@
             font-size: 0.95rem;
         }
 
+        /* النموذج النظيف */
         form {
             display: flex;
             flex-direction: column;
@@ -189,20 +234,21 @@
         }
 
         .btn-submit {
-            background-color: var(--ds-gold-primary);
+            background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
             color: #000;
             font-size: 1.2rem;
-            font-weight: 800;
+            font-weight: 900;
             padding: 15px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: 0.3s ease;
             margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.25);
         }
 
         .btn-submit:hover {
-            background-color: var(--ds-gold-hover);
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
             transform: translateY(-2px);
         }
 
@@ -216,14 +262,18 @@
 </head>
 <body>
 
+    <!-- خلفية تساقط العيون -->
+    <canvas id="eyes-canvas"></canvas>
+
     <header>
-        <div class="logo">DROXILO SHOP</div>
+        <img src="LOGO.PNG" alt="DROXILOSHOP Logo" class="header-logo-img">
+        <div class="logo-text">DROXILOSHOP</div>
     </header>
 
     <div class="container">
         <div class="product-card">
             
-            <!-- الصورة الرئيسية -->
+            <!-- الصورة الرئيسية LWL.jpg -->
             <div class="product-main-image">
                 <img src="LWL.jpg" alt="Toji Fushiguro Oversized Hoodie">
             </div>
@@ -232,10 +282,14 @@
                 <div class="product-subtitle">EDITION LIMITÉE | Toji Fushiguro</div>
                 <h1 class="product-title">Oversized Hoodie 320g - Washed Black</h1>
                 
-                <!-- الصور الإضافية -->
+                <!-- باقي الصور 222.jpg و 9TN.jpg -->
                 <div class="gallery-grid">
                     <img src="222.jpg" alt="Detail 1">
                     <img src="9TN.jpg" alt="Detail 2">
+                </div>
+
+                <div class="story-box">
+                    إذا كنت تبحث عن هودي فخم بتصميم فريد يجمع بين الهيبة والراحة المطلقة، فهذا الهودي صُمم خصيصاً لك. بقطن ثقيل 320g وقصة أفرسايز مضبوطة، ستحصل على مظهر رهيب يبرز تميزك بلمسة مستوحاة من أسطورة الأنمي Toji Fushiguro.
                 </div>
 
                 <div class="badge-list">
@@ -281,15 +335,87 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-submit">تأكيد الطلب الآن</button>
+                    <button type="submit" class="btn-submit">تأكيد الطلب الآن 🚀</button>
                 </form>
             </div>
         </div>
 
         <footer>
-            <p>© 2026 DROXILO SHOP. All rights reserved.</p>
+            <p>© 2026 DROXILOSHOP. جميع الحقوق محفوظة.</p>
         </footer>
     </div>
 
+    <!-- سكربت أنيميشن قطرات العيون -->
+    <script>
+        const canvas = document.getElementById('eyes-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const eyes = [];
+        const eyeCount = 28;
+
+        class EyeDrop {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height;
+                this.speed = 1 + Math.random() * 2.2;
+                this.size = 12 + Math.random() * 10;
+                this.alpha = 0.3 + Math.random() * 0.5;
+                this.color = Math.random() > 0.4 ? '#d4af37' : '#e74c3c';
+            }
+
+            update() {
+                this.y += this.speed;
+                if (this.y > canvas.height + 20) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                
+                // شكل العين
+                ctx.ellipse(this.x, this.y, this.size, this.size / 2, 0, 0, Math.PI * 2);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                // بؤبؤ العين (Pupil)
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size / 4, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < eyeCount; i++) {
+            eyes.push(new EyeDrop());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            eyes.forEach(eye => {
+                eye.update();
+                eye.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
 </body>
 </html>
