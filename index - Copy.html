@@ -128,7 +128,7 @@
         /* شبكة عرض المنتج المتوازنة */
         .product-section {
             display: grid;
-            grid-template-columns: 440px 1fr; /* عمود الصور وعمود التفاصيل */
+            grid-template-columns: 440px 1fr;
             gap: 30px;
             background-color: var(--ds-card-bg);
             padding: 30px;
@@ -167,7 +167,7 @@
             pointer-events: none;
         }
 
-        /* الصور المصغرة تحت الصورة الكبيرة مباشرة وبنفس العرض المتناسق */
+        /* الصور المصغرة تحت الصورة الكبيرة مباشرة */
         .thumbnails-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -582,18 +582,6 @@
             color: var(--ds-gold);
         }
 
-        .thank-you-msg {
-            display: none;
-            background-color: rgba(46, 204, 113, 0.15);
-            color: var(--ds-green);
-            border: 1px solid var(--ds-green);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 700;
-            margin-top: 15px;
-        }
-
         .user-reviews-list {
             margin-top: 25px;
             display: flex;
@@ -750,8 +738,8 @@
                 </div>
 
                 <div class="price-row">
-                    <div class="current-price">280 DH</div>
-                    <div class="old-price">380 DH</div>
+                    <div class="current-price">279 DH</div>
+                    <div class="old-price">379 DH</div>
                     <div class="discount-badge">خصم 26%</div>
                 </div>
 
@@ -797,6 +785,7 @@
                             <option value="M">مقاس M</option>
                             <option value="L">مقاس L</option>
                             <option value="XL">مقاس XL</option>
+                            <option value="XXL">مقاس XXL</option>
                         </select>
                     </div>
 
@@ -877,13 +866,13 @@
             </div>
         </div>
 
-        <!-- قسم التقييمات -->
+        <!-- قسم التقييمات مرتبط بـ Formspree -->
         <div class="reviews-section">
             <div class="info-title">⭐ آرائكم وتقييمات المنتجات</div>
             
             <div class="add-review-box">
                 <h4 style="color:#fff; margin-bottom:10px;">أضف تقييمك الخاص للمنتج</h4>
-                <form id="user-review-form" onsubmit="handleReviewSubmit(event)">
+                <form action="https://formspree.io/f/xqppbnpr" method="POST">
                     <div class="star-rating-select" id="star-selector">
                         <span onclick="setRating(1)">★</span>
                         <span onclick="setRating(2)">★</span>
@@ -891,18 +880,17 @@
                         <span onclick="setRating(4)">★</span>
                         <span onclick="setRating(5)">★</span>
                     </div>
-                    <div class="form-group" style="margin-bottom:10px;">
-                        <input type="text" id="reviewer-name" placeholder="اسمك الكريم" required>
-                    </div>
-                    <div class="form-group" style="margin-bottom:10px;">
-                        <textarea id="review-comment" rows="3" placeholder="لماذا اخترت هذا التقييم؟ انطباعك عن الجودة..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-add-to-cart" style="width:100%; padding:10px; font-size:1rem;">إرسال التقييم</button>
-                </form>
+                    <!-- حقل مخفي لإرسال عدد النجوم عبر Formspree -->
+                    <input type="hidden" name="rating" id="rating-input" value="5 Stars">
 
-                <div class="thank-you-msg" id="thank-you-message">
-                    شكراً لك على تقييمك لمشروعنا! نقدّر رأيك ووقتك.
-                </div>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <input type="text" name="reviewer_name" placeholder="اسمك الكريم" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <textarea name="review_comment" rows="3" placeholder="لماذا اخترت هذا التقييم؟ انطباعك عن الجودة..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-add-to-cart" style="width:100%; padding:10px; font-size:1rem;">إرسال التقييم 📤</button>
+                </form>
             </div>
 
             <div class="user-reviews-list" id="reviews-container">
@@ -990,7 +978,7 @@
         });
 
         zoomContainer.addEventListener('mouseleave', () => {
-            mainImg.style.transform = 'scale(1);';
+            mainImg.style.transform = 'scale(1)';
             mainImg.style.transformOrigin = 'center center';
         });
 
@@ -1009,9 +997,7 @@
         }
 
         // 6. نظام تقييم النجوم
-        let selectedRating = 5;
         function setRating(rating) {
-            selectedRating = rating;
             const stars = document.querySelectorAll('#star-selector span');
             stars.forEach((star, index) => {
                 if (index < rating) {
@@ -1020,34 +1006,11 @@
                     star.classList.remove('selected');
                 }
             });
+            document.getElementById('rating-input').value = rating + " Stars";
         }
         setRating(5);
 
-        // 7. إرسال التقييم
-        function handleReviewSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('reviewer-name').value;
-            const comment = document.getElementById('review-comment').value;
-
-            const reviewCard = document.createElement('div');
-            reviewCard.className = 'review-card';
-            reviewCard.innerHTML = `
-                <div class="review-author">${name}</div>
-                <div class="review-stars">${'★'.repeat(selectedRating)}</div>
-                <div class="review-text">${comment}</div>
-            `;
-
-            document.getElementById('reviews-container').prepend(reviewCard);
-            document.getElementById('user-review-form').reset();
-            setRating(5);
-
-            document.getElementById('thank-you-message').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('thank-you-message').style.display = 'none';
-            }, 5000);
-        }
-
-        // 8. خلفية العيون
+        // 7. خلفية العيون
         const canvas = document.getElementById('eyes-canvas');
         const ctx = canvas.getContext('2d');
 
