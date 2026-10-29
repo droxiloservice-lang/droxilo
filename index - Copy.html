@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DROXILOSHOP | Toji Fushiguro Oversized Hoodie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ds-bg: #0a0a0a;
+            --ds-card-bg: rgba(20, 20, 20, 0.95);
+            --ds-text: #ffffff;
+            --ds-text-muted: #a0a0a0;
+            --ds-border: rgba(212, 175, 55, 0.35);
+            --ds-gold: #d4af37;
+            --ds-gold-light: #f3e5ab;
+            --ds-dark: #111111;
+            --ds-green: #2ecc71;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--ds-bg);
+            color: var(--ds-text);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* تأثير قطرات العيون في الخلفية */
+        #eyes-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.25;
+        }
+
+        /* شريط الشحن المجاني العلوي */
+        .top-announcement-bar {
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+            color: var(--ds-gold);
+            text-align: center;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--ds-border);
+            text-transform: uppercase;
+        }
+
+        /* الهايدر المخصص باللوجو والاسم بتنسيق ذهبي وأسود فخم */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--ds-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .header-brand-name {
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--ds-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* شبكة عرض المنتج */
+        .product-section {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr;
+            gap: 25px;
+            background-color: var(--ds-card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--ds-border);
+        }
+
+        .thumbnails-col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .thumb-img {
+            width: 100%;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--ds-border);
+            cursor: pointer;
+            transition: 0.2s;
+            background-color: #000;
+        }
+
+        .thumb-img:hover {
+            border-color: var(--ds-gold);
+        }
+
+        .main-image-col {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--ds-gold);
+            background-color: #000;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .main-image-col img, .main-image-col video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .details-col {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: right;
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .reviews-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--ds-text-muted);
+        }
+
+        .stars {
+            color: var(--ds-gold);
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 5px 0;
+        }
+
+        .current-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--ds-gold);
+        }
+
+        .old-price {
+            font-size: 1.1rem;
+            color: #777;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background: linear-gradient(135deg, var(--ds-gold) 0%, #aa8c2c 100%);
+            color: #000;
+            padding: 3px 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: 4px;
+        }
+
+        .product-desc {
+            font-size: 0.95rem;
+            color: #dcdcdc;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 3px solid var(--ds-gold);
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .option-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--ds-gold);
+        }
+
+        .sizes-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .size-box {
+            padding: 8px 16px;
+            border: 1px solid var(--ds-border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            background: #141414;
+            color: #fff;
+            transition: 0.2s;
+        }
+
+        .size-box.active {
+            border-color: var(--ds-gold);
+            background-color: var(--ds-gold);
+            color: #000;
+        }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--ds-border);
+            background-color: #121212;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--ds-gold);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-add-to-cart {
+            background: linear-gradient(135deg, var(--ds-gold) 0%, #aa8c2c 100%);
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: 900;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.25);
+        }
+
+        .btn-add-to-cart:hover {
+            background: linear-gradient(135deg, var(--ds-gold-light) 0%, var(--ds-gold) 100%);
+        }
+
+        .shipping-info {
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.8rem;
+            color: var(--ds-text-muted);
+            border-top: 1px solid var(--ds-border);
+            padding-top: 15px;
+            margin-top: 10px;
+        }
+
+        .tabs-section {
+            margin-top: 35px;
+            background-color: var(--ds-card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--ds-border);
+            padding: 25px;
+        }
+
+        .tabs-header {
+            border-bottom: 1px solid var(--ds-border);
+            padding-bottom: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--ds-gold);
+        }
+
+        .tabs-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: #dcdcdc;
+            list-style: none;
+        }
+
+        .tab-image img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid var(--ds-gold);
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        /* Footer يحتوي اللوجو وحقوق الملكية فقط */
+        footer {
+            margin-top: 50px;
+            background-color: #0d0d0d;
+            border-top: 1px solid var(--ds-border);
+            padding: 30px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--ds-text-muted);
+        }
+
+        @media(max-width: 768px) {
+            .product-section {
+                grid-template-columns: 1fr;
+            }
+            .thumbnails-col {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .thumb-img {
+                width: 60px;
+                height: 60px;
+            }
+            .tabs-body {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="eyes-canvas"></canvas>
+
+    <!-- شريط الشحن العلوي -->
+    <div class="top-announcement-bar">
+        Free Shipping on orders over $28
+    </div>
+
+    <!-- الهايدر المبسط (اللوجو والاسم فقط) -->
+    <header>
+        <img src="LOGO.png" alt="DROXILOSHOP Logo" class="header-logo-img" onerror="this.style.display='none'">
+        <div class="header-brand-name">DROXILOSHOP</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="product-section">
+            
+            <div class="thumbnails-col">
+                <img src="LWL.jpg" alt="Thumb 1" class="thumb-img" onclick="changeMedia('image', 'LWL.jpg')">
+                <img src="222.jpg" alt="Thumb 2" class="thumb-img" onclick="changeMedia('image', '222.jpg')">
+                <img src="9TN.jpg" alt="Thumb 3" class="thumb-img" onclick="changeMedia('image', '9TN.jpg')">
+            </div>
+
+            <div class="main-image-col" id="main-media">
+                <video autoplay muted loop playsinline preload="auto">
+                    <source src="video.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="details-col">
+                <h1 class="product-title">Toji Fushiguro Oversized Hoodie</h1>
+                
+                <div class="reviews-row">
+                    <span class="stars">★★★★★</span>
+                    <span>4.9 (142 مراجعة)</span>
+                </div>
+
+                <div class="price-row">
+                    <div class="current-price">280 DH</div>
+                    <div class="old-price">380 DH</div>
+                    <div class="discount-badge">خصم 26%</div>
+                </div>
+
+                <p class="product-desc">
+                    هودي فخم بقطن ثقيل عالي الجودة 320g مع طباعة DTF رقمية فائقة الثبات. تصميم أفرسايز يمنحك راحة مطلقة وهيبة مستوحاة من أسطورة الأنمي Toji Fushiguro.
+                </p>
+
+                <div>
+                    <div class="option-title">المقاس المتاح (Size):</div>
+                    <div class="sizes-row" style="margin-top: 8px;">
+                        <button type="button" class="size-box active" onclick="selectSize('S')">S</button>
+                        <button type="button" class="size-box" onclick="selectSize('M')">M</button>
+                        <button type="button" class="size-box" onclick="selectSize('L')">L</button>
+                        <button type="button" class="size-box" onclick="selectSize('XL')">XL</button>
+                    </div>
+                </div>
+
+                <form action="https://formspree.io/f/xqppbnpr" method="POST" class="order-form">
+                    <div class="form-group">
+                        <input type="text" name="fullname" placeholder="الاسم الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="رقم الهاتف (الواتساب)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="city" placeholder="المدينة" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" placeholder="العنوان الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="size_selected" id="size-select" required>
+                            <option value="" disabled>اختر المقاس المناسب</option>
+                            <option value="S" selected>S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-add-to-cart">تأكيد الطلب (الدفع عند الاستلام)</button>
+                </form>
+
+                <div class="shipping-info">
+                    <span>🚚 توصيل مجاني</span>
+                    <span>🔄 إرجاع سهل</span>
+                    <span>🔒 دفع آمن</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tabs-section">
+            <div class="tabs-header">التفاصيل والخامات</div>
+            <div class="tabs-body">
+                <ul class="features-list">
+                    <li>✓ قطن خالص ثقيل 100% بنسبة وزن 320g.</li>
+                    <li>✓ طباعة DTF متطورة مقاومة للغسيل المتكرر.</li>
+                    <li>✓ تصميم هودي مريح بقصة أفرسايز عصرية.</li>
+                    <li>✓ أطراف مرنة ومتينة للأكمام والخصر.</li>
+                </ul>
+                <div class="tab-image">
+                    <img src="9TN.jpg" alt="Fabric Detail">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer يضم اللوجو والحقوق فقط -->
+    <footer>
+        <img src="LOGO.png" alt="DROXILOSHOP Logo" class="footer-logo" onerror="this.style.display='none'">
+        <div class="footer-text">© 2026 DROXILOSHOP. جميع الحقوق محفوظة.</div>
+    </footer>
+
+    <!-- سكربت تفاعل الصور وتأثير قطرات العيون -->
+    <script>
+        function changeMedia(type, src) {
+            const container = document.getElementById('main-media');
+            if (type === 'image') {
+                container.innerHTML = `<img src="${src}" alt="Main Media">`;
+            }
+        }
+
+        function selectSize(size) {
+            document.querySelectorAll('.size-box').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('size-select').value = size;
+        }
+
+        const canvas = document.getElementById('eyes-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const eyes = [];
+        const eyeCount = 30;
+
+        class EyeDrop {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height;
+                this.speed = 1 + Math.random() * 2;
+                this.size = 10 + Math.random() * 8;
+                this.alpha = 0.2 + Math.random() * 0.3;
+                this.color = Math.random() > 0.4 ? '#d4af37' : '#e74c3c';
+            }
+
+            update() {
+                this.y += this.speed;
+                if (this.y > canvas.height + 20) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.ellipse(this.x, this.y, this.size, this.size / 2, 0, 0, Math.PI * 2);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size / 4, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < eyeCount; i++) {
+            eyes.push(new EyeDrop());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            eyes.forEach(eye => {
+                eye.update();
+                eye.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
