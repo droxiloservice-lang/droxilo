@@ -45,7 +45,7 @@
             opacity: 0.22;
         }
 
-        /* شريط الإعلانات والعد التنازلي العلوي */
+        /* شريط الإعلانات والعد التنازلي الثابت العلوي */
         .top-announcement-bar {
             background: linear-gradient(135deg, #121212 0%, #1f1f1f 100%);
             color: var(--ds-gold);
@@ -685,7 +685,7 @@
 
     <canvas id="eyes-canvas"></canvas>
 
-    <!-- شريط التوصيل مع العد التنازلي المدمج فوق الـ Header -->
+    <!-- شريط التوصيل مع العد التنازلي الثابت فوق الـ Header -->
     <div class="top-announcement-bar">
         <span>🚚 توصيل مجاني لجميع الطلبات في المغرب</span>
         
@@ -738,8 +738,8 @@
                 </div>
 
                 <div class="price-row">
-                    <div class="current-price">279 DH</div>
-                    <div class="old-price">379 DH</div>
+                    <div class="current-price">280 DH</div>
+                    <div class="old-price">380 DH</div>
                     <div class="discount-badge">خصم 26%</div>
                 </div>
 
@@ -785,7 +785,6 @@
                             <option value="M">مقاس M</option>
                             <option value="L">مقاس L</option>
                             <option value="XL">مقاس XL</option>
-                            <option value="XXL">مقاس XXL</option>
                         </select>
                     </div>
 
@@ -920,23 +919,34 @@
     </footer>
 
     <script>
-        // 1. العد التنازلي التلقائي في شريط الإعلانات العلوي
-        let countdownTime = 5 * 24 * 60 * 60; // 5 أيام بالثواني
+        // 1. العد التنازلي الثابت لمدة 5 أيام لكل الزوار (يستمر في التناقص الحقيقي ولا يعود للصفر عند التحديث)
         const timerDisplay = document.getElementById('header-countdown');
+        
+        // التحقق مما إذا كان هناك وقت نهاية مخزن مسبقاً في متصفح الزائر، وإذا لم يكن موجوداً نحدد له 5 أيام من الآن
+        let countDownDate = localStorage.getItem('droxilo_countdown_end');
+        
+        if (!countDownDate) {
+            countDownDate = new Date().getTime() + (5 * 24 * 60 * 60 * 1000); // 5 أيام بالمللي ثانية
+            localStorage.setItem('droxilo_countdown_end', countDownDate);
+        } else {
+            countDownDate = parseInt(countDownDate);
+        }
 
         const timerInterval = setInterval(() => {
-            if (countdownTime <= 0) {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance <= 0) {
                 clearInterval(timerInterval);
                 timerDisplay.textContent = "انتهى العرض!";
+                localStorage.removeItem('droxilo_countdown_end'); // إعادة ضبط عند الانتهاء التام
                 return;
             }
 
-            countdownTime--;
-
-            const days = Math.floor(countdownTime / (24 * 3600));
-            const hours = Math.floor((countdownTime % (24 * 3600)) / 3600);
-            const mins = Math.floor((countdownTime % 3600) / 60);
-            const secs = countdownTime % 60;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((distance % (1000 * 60)) / 1000);
 
             timerDisplay.textContent = `${String(days).padStart(2, '0')}d : ${String(hours).padStart(2, '0')}h : ${String(mins).padStart(2, '0')}m : ${String(secs).padStart(2, '0')}s`;
         }, 1000);
@@ -985,6 +995,7 @@
         // 4. تغيير الصورة الرئيسية
         function changeMainImage(src, element) {
             mainImg.src = src;
+            document.querySelectorAll('.thumb-img').files = [];
             document.querySelectorAll('.thumb-img').forEach(img => img.classList.remove('active'));
             element.classList.add('active');
         }
