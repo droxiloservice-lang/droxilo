@@ -7,14 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ds-bg: #0a0a0a;
-            --ds-card-bg: rgba(20, 20, 20, 0.95);
+            --ds-bg: #070707;
+            --ds-card-bg: rgba(18, 18, 18, 0.96);
             --ds-text: #ffffff;
             --ds-text-muted: #a0a0a0;
-            --ds-border: rgba(212, 175, 55, 0.35);
+            --ds-border: rgba(212, 175, 55, 0.3);
             --ds-gold: #d4af37;
             --ds-gold-light: #f3e5ab;
-            --ds-dark: #111111;
             --ds-green: #2ecc71;
         }
 
@@ -28,12 +27,12 @@
         body {
             background-color: var(--ds-bg);
             color: var(--ds-text);
-            line-height: 1.6;
+            line-height: 1.7;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* تأثير قطرات العيون في الخلفية */
+        /* خلفية قطرات العيون */
         #eyes-canvas {
             position: fixed;
             top: 0;
@@ -42,23 +41,30 @@
             height: 100%;
             pointer-events: none;
             z-index: 999;
-            opacity: 0.25;
+            opacity: 0.22;
         }
 
-        /* شريط الشحن المجاني العلوي */
+        /* شريط التوصيل ورقم الهاتف */
         .top-announcement-bar {
-            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+            background: linear-gradient(135deg, #121212 0%, #1f1f1f 100%);
             color: var(--ds-gold);
-            text-align: center;
-            padding: 8px 15px;
-            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 25px;
+            font-size: 0.88rem;
             font-weight: 700;
-            letter-spacing: 1px;
             border-bottom: 1px solid var(--ds-border);
-            text-transform: uppercase;
         }
 
-        /* الهايدر المخصص باللوجو والاسم بتنسيق ذهبي وأسود فخم */
+        .phone-contact a {
+            color: var(--ds-gold-light);
+            text-decoration: none;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        /* الهايدر الرئيسي */
         header {
             display: flex;
             align-items: center;
@@ -74,15 +80,14 @@
         }
 
         .header-logo-img {
-            height: 40px;
+            height: 42px;
             width: auto;
             object-fit: contain;
             display: block;
-            border-radius: 4px;
         }
 
         .header-brand-name {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 900;
             letter-spacing: 2px;
             background: linear-gradient(135deg, #ffffff 30%, var(--ds-gold) 100%);
@@ -102,12 +107,12 @@
         /* شبكة عرض المنتج */
         .product-section {
             display: grid;
-            grid-template-columns: 80px 1fr 1fr;
+            grid-template-columns: 85px 1fr 1fr;
             gap: 25px;
             background-color: var(--ds-card-bg);
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85);
             border: 1px solid var(--ds-border);
         }
 
@@ -121,35 +126,38 @@
             width: 100%;
             height: 85px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 1px solid var(--ds-border);
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             background-color: #000;
         }
 
-        .thumb-img:hover {
+        .thumb-img:hover, .thumb-img.active {
             border-color: var(--ds-gold);
+            transform: scale(1.03);
         }
 
-        .main-image-col {
+        /* حاوية الصورة الرئيسية مع ميزة الزوم (Zoom-on-Hover) */
+        .main-image-container {
             width: 100%;
-            border-radius: 8px;
+            height: 480px;
+            border-radius: 10px;
             overflow: hidden;
             border: 2px solid var(--ds-gold);
             background-color: #000;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+            position: relative;
+            cursor: crosshair;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
         }
 
-        .main-image-col img, .main-image-col video {
+        .main-image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.2s ease-out, transform-origin 0.2s ease-out;
+            pointer-events: none;
         }
 
         .details-col {
@@ -161,19 +169,15 @@
 
         .product-title {
             font-size: 1.8rem;
-            font-weight: 800;
+            font-weight: 900;
             color: #fff;
         }
 
-        .reviews-row {
+        .reviews-summary {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9rem;
-            color: var(--ds-text-muted);
-        }
-
-        .stars {
+            font-size: 0.95rem;
             color: var(--ds-gold);
         }
 
@@ -185,7 +189,7 @@
         }
 
         .current-price {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 900;
             color: var(--ds-gold);
         }
@@ -199,35 +203,30 @@
         .discount-badge {
             background: linear-gradient(135deg, var(--ds-gold) 0%, #aa8c2c 100%);
             color: #000;
-            padding: 3px 8px;
-            font-size: 0.75rem;
+            padding: 4px 10px;
+            font-size: 0.8rem;
             font-weight: 800;
-            border-radius: 4px;
-        }
-
-        .product-desc {
-            font-size: 0.95rem;
-            color: #dcdcdc;
-            line-height: 1.6;
-            background: rgba(255, 255, 255, 0.03);
-            border-right: 3px solid var(--ds-gold);
-            padding: 12px;
             border-radius: 6px;
         }
 
-        .option-title {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--ds-gold);
+        .product-desc {
+            font-size: 0.96rem;
+            color: #e0e0e0;
+            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 4px solid var(--ds-gold);
+            padding: 14px;
+            border-radius: 8px;
         }
 
         .sizes-row {
             display: flex;
             gap: 10px;
+            margin-top: 5px;
         }
 
         .size-box {
-            padding: 8px 16px;
+            padding: 8px 18px;
             border: 1px solid var(--ds-border);
             border-radius: 6px;
             font-size: 0.9rem;
@@ -251,10 +250,10 @@
             margin-top: 10px;
         }
 
-        .form-group input, .form-group select {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border-radius: 6px;
+            padding: 12px 15px;
+            border-radius: 8px;
             border: 1px solid var(--ds-border);
             background-color: #121212;
             color: #fff;
@@ -262,86 +261,225 @@
             outline: none;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: var(--ds-gold);
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         .btn-add-to-cart {
             background: linear-gradient(135deg, var(--ds-gold) 0%, #aa8c2c 100%);
             color: #000;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 900;
             padding: 15px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s ease;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
         }
 
         .btn-add-to-cart:hover {
             background: linear-gradient(135deg, var(--ds-gold-light) 0%, var(--ds-gold) 100%);
+            transform: translateY(-2px);
         }
 
         .shipping-info {
             display: flex;
             justify-content: space-around;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--ds-text-muted);
             border-top: 1px solid var(--ds-border);
             padding-top: 15px;
             margin-top: 10px;
         }
 
-        .tabs-section {
+        /* قسم التفاصيل، الخامات، وفيديو الريلز التفاعلي الاحترافي */
+        .info-section {
             margin-top: 35px;
             background-color: var(--ds-card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             border: 1px solid var(--ds-border);
-            padding: 25px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
         }
 
-        .tabs-header {
-            border-bottom: 1px solid var(--ds-border);
-            padding-bottom: 12px;
-            font-weight: 700;
-            font-size: 0.95rem;
+        .info-title {
+            font-size: 1.15rem;
+            font-weight: 800;
             color: var(--ds-gold);
+            border-bottom: 1px solid var(--ds-border);
+            padding-bottom: 10px;
         }
 
-        .tabs-body {
+        .details-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 20px;
+            gap: 25px;
             align-items: center;
         }
 
         .features-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            font-size: 0.92rem;
+            gap: 12px;
+            font-size: 0.95rem;
             color: #dcdcdc;
             list-style: none;
         }
 
-        .tab-image img {
+        /* مشغل الريلز التفاعلي والعمودي الصافي */
+        .reel-player-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
-            border-radius: 8px;
-            border: 2px solid var(--ds-gold);
-            max-height: 250px;
-            object-fit: cover;
         }
 
-        /* Footer يحتوي اللوجو وحقوق الملكية فقط */
+        .reel-box {
+            width: 280px;
+            height: 480px;
+            background: #000;
+            border-radius: 14px;
+            border: 2px solid var(--ds-gold);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
+        }
+
+        .reel-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .reel-overlay-ui {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 5;
+        }
+
+        .reel-btn {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--ds-gold);
+            color: var(--ds-gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+            transition: 0.2s;
+        }
+
+        .reel-btn:hover {
+            background: var(--ds-gold);
+            color: #000;
+        }
+
+        .return-policy-box {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.93rem;
+            color: #dcdcdc;
+            line-height: 1.8;
+            border-right: 3px solid var(--ds-green);
+        }
+
+        /* قسم التقييمات التفاعلي */
+        .reviews-section {
+            margin-top: 35px;
+            background-color: var(--ds-card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--ds-border);
+            padding: 25px;
+        }
+
+        .add-review-box {
+            background: #111111;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid var(--ds-border);
+        }
+
+        .star-rating-select {
+            display: flex;
+            gap: 8px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #555;
+            margin-bottom: 15px;
+            direction: ltr;
+            justify-content: flex-end;
+        }
+
+        .star-rating-select span:hover,
+        .star-rating-select span.selected {
+            color: var(--ds-gold);
+        }
+
+        .thank-you-msg {
+            display: none;
+            background-color: rgba(46, 204, 113, 0.15);
+            color: var(--ds-green);
+            border: 1px solid var(--ds-green);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        .user-reviews-list {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .review-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--ds-border);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .review-author {
+            font-weight: 800;
+            color: var(--ds-gold);
+            font-size: 0.95rem;
+        }
+
+        .review-stars {
+            color: var(--ds-gold);
+            font-size: 0.85rem;
+            margin: 3px 0;
+        }
+
+        .review-text {
+            font-size: 0.9rem;
+            color: #dcdcdc;
+        }
+
         footer {
             margin-top: 50px;
             background-color: #0d0d0d;
             border-top: 1px solid var(--ds-border);
-            padding: 30px 20px;
+            padding: 35px 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -350,14 +488,13 @@
         }
 
         .footer-logo {
-            height: 45px;
+            height: 48px;
             width: auto;
             object-fit: contain;
-            border-radius: 4px;
         }
 
         .footer-text {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: var(--ds-text-muted);
         }
 
@@ -370,11 +507,15 @@
                 justify-content: center;
             }
             .thumb-img {
-                width: 60px;
-                height: 60px;
+                width: 65px;
+                height: 65px;
             }
-            .tabs-body {
+            .details-grid {
                 grid-template-columns: 1fr;
+            }
+            .top-announcement-bar {
+                flex-direction: column;
+                gap: 5px;
             }
         }
     </style>
@@ -383,12 +524,12 @@
 
     <canvas id="eyes-canvas"></canvas>
 
-    <!-- شريط الشحن العلوي -->
+    <!-- شريط التوصيل ورقم الهاتف -->
     <div class="top-announcement-bar">
-        Free Shipping on orders over $28
+        <span>🚚 التوصيل مجاني لجميع الطلبات في المغرب</span>
+        <span class="phone-contact">للتواصل أو الاستفسار: <a href="tel:0725274491">0725274491</a></span>
     </div>
 
-    <!-- الهايدر المبسط (اللوجو والاسم فقط) -->
     <header>
         <img src="LOGO.png" alt="DROXILOSHOP Logo" class="header-logo-img" onerror="this.style.display='none'">
         <div class="header-brand-name">DROXILOSHOP</div>
@@ -398,24 +539,25 @@
         
         <div class="product-section">
             
+            <!-- الصور المصغرة -->
             <div class="thumbnails-col">
-                <img src="LWL.jpg" alt="Thumb 1" class="thumb-img" onclick="changeMedia('image', 'LWL.jpg')">
-                <img src="222.jpg" alt="Thumb 2" class="thumb-img" onclick="changeMedia('image', '222.jpg')">
-                <img src="9TN.jpg" alt="Thumb 3" class="thumb-img" onclick="changeMedia('image', '9TN.jpg')">
+                <img src="LWL.jpg" alt="Thumb 1" class="thumb-img active" onclick="changeMainImage('LWL.jpg', this)">
+                <img src="222.jpg" alt="Thumb 2" class="thumb-img" onclick="changeMainImage('222.jpg', this)">
+                <img src="9TN.jpg" alt="Thumb 3" class="thumb-img" onclick="changeMainImage('9TN.jpg', this)">
             </div>
 
-            <div class="main-image-col" id="main-media">
-                <video autoplay muted loop playsinline preload="auto">
-                    <source src="video.mp4" type="video/mp4">
-                </video>
+            <!-- حاوية الصورة مع ميزة التكبير عند التمرير (Zoom-on-Hover) -->
+            <div class="main-image-container" id="zoom-container">
+                <img src="LWL.jpg" alt="Toji Fushiguro Oversized Hoodie" id="main-product-img">
             </div>
 
+            <!-- التفاصيل واستمارة الطلب -->
             <div class="details-col">
                 <h1 class="product-title">Toji Fushiguro Oversized Hoodie</h1>
                 
-                <div class="reviews-row">
-                    <span class="stars">★★★★★</span>
-                    <span>4.9 (142 مراجعة)</span>
+                <div class="reviews-summary">
+                    <span>★★★★★</span>
+                    <span id="average-rating-display">4.9 (استناداً لتقييمات الزبناء)</span>
                 </div>
 
                 <div class="price-row">
@@ -425,16 +567,16 @@
                 </div>
 
                 <p class="product-desc">
-                    هودي فخم بقطن ثقيل عالي الجودة 320g مع طباعة DTF رقمية فائقة الثبات. تصميم أفرسايز يمنحك راحة مطلقة وهيبة مستوحاة من أسطورة الأنمي Toji Fushiguro.
+                    هودي فخم مصنوع بقطن ثقيل عالي الجودة 320g وطباعة رقمية ثابتة. قصة أفرسايز مضبوطة ومريحة تمنحك مظهر الأسطورة Toji Fushiguro.
                 </p>
 
                 <div>
-                    <div class="option-title">المقاس المتاح (Size):</div>
-                    <div class="sizes-row" style="margin-top: 8px;">
-                        <button type="button" class="size-box active" onclick="selectSize('S')">S</button>
-                        <button type="button" class="size-box" onclick="selectSize('M')">M</button>
-                        <button type="button" class="size-box" onclick="selectSize('L')">L</button>
-                        <button type="button" class="size-box" onclick="selectSize('XL')">XL</button>
+                    <label style="font-size:0.9rem; font-weight:700; color:var(--ds-gold);">اختر المقاس المناسب:</label>
+                    <div class="sizes-row">
+                        <button type="button" class="size-box active" onclick="selectSize('S', this)">S</button>
+                        <button type="button" class="size-box" onclick="selectSize('M', this)">M</button>
+                        <button type="button" class="size-box" onclick="selectSize('L', this)">L</button>
+                        <button type="button" class="size-box" onclick="selectSize('XL', this)">XL</button>
                     </div>
                 </div>
 
@@ -449,68 +591,208 @@
                         <input type="text" name="city" placeholder="المدينة" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="address" placeholder="العنوان الكامل" required>
+                        <input type="text" name="address" placeholder="العنوان الكامل (الحي / الشارع)" required>
                     </div>
                     <div class="form-group">
                         <select name="size_selected" id="size-select" required>
-                            <option value="" disabled>اختر المقاس المناسب</option>
-                            <option value="S" selected>S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
+                            <option value="S" selected>مقاس S</option>
+                            <option value="M">مقاس M</option>
+                            <option value="L">مقاس L</option>
+                            <option value="XL">مقاس XL</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-add-to-cart">تأكيد الطلب (الدفع عند الاستلام)</button>
+                    <button type="submit" class="btn-add-to-cart">تأكيد الطلب الآن 🚀 (الدفع عند الاستلام)</button>
                 </form>
 
                 <div class="shipping-info">
                     <span>🚚 توصيل مجاني</span>
-                    <span>🔄 إرجاع سهل</span>
-                    <span>🔒 دفع آمن</span>
+                    <span>🔄 إرجاع واستبدال مضمون</span>
+                    <span>💵 الدفع عند الاستلام</span>
                 </div>
             </div>
 
         </div>
 
-        <div class="tabs-section">
-            <div class="tabs-header">التفاصيل والخامات</div>
-            <div class="tabs-body">
+        <!-- قسم التفاصيل، الخامات، وفيديو الريلز التفاعلي الصافي -->
+        <div class="info-section">
+            <div class="info-title">🧵 التفاصيل الفنية، الخامات ومعاينة الريلز</div>
+            
+            <div class="details-grid">
                 <ul class="features-list">
-                    <li>✓ قطن خالص ثقيل 100% بنسبة وزن 320g.</li>
-                    <li>✓ طباعة DTF متطورة مقاومة للغسيل المتكرر.</li>
-                    <li>✓ تصميم هودي مريح بقصة أفرسايز عصرية.</li>
-                    <li>✓ أطراف مرنة ومتينة للأكمام والخصر.</li>
+                    <li>✓ قطن خالص ثقيل 100% بنسبة وزن 320g لدفء ومظهر فخم.</li>
+                    <li>✓ طباعة DTF متطورة وعالية الدقة مقاومة للغسيل المتكرر.</li>
+                    <li>✓ تصميم أفرسايز عصري يواكب صيحات الستريتوير العالمية.</li>
+                    <li>✓ خياطة مزدوجة ومتينة للأكمام والخصر لتدوم طويلاً.</li>
                 </ul>
-                <div class="tab-image">
-                    <img src="9TN.jpg" alt="Fabric Detail">
+                
+                <!-- مشغل الريلز التفاعلي العمودي -->
+                <div class="reel-player-wrapper">
+                    <div class="reel-box" id="reel-container">
+                        <video id="reel-video" autoplay muted loop playsinline preload="auto">
+                            <source src="video.mp4" type="video/mp4">
+                            متصفحك لا يدعم تشغيل الفيديو.
+                        </video>
+                        <div class="reel-overlay-ui">
+                            <button class="reel-btn" onclick="toggleMute()" title="كتم/إلغاء الكتم" id="mute-btn">🔊</button>
+                            <button class="reel-btn" onclick="togglePlay()" title="تشغيل/إيقاف" id="play-btn">⏸</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-title" style="margin-top: 10px;">🔄 سياسة الإرجاع والاستبدال السهلة</div>
+            <div class="return-policy-box">
+                نحن في **DROXILOSHOP** نضع رضاكم في المقام الأول. إذا وصلك الهودي ووجدت أن المقاس غير مناسب أو رغبت في استبداله بأي سبب، يمكنك طلب الاستبدال أو الإرجاع خلال **7 أيام** من استلام الطلب بسهولة تامة. كل ما عليك هو التواصل معنا عبر الواتساب على الرقم 0725274491 وسيقوم فريقنا بتنسيق عملية الإرجاع والتوصيل حتى باب منزلكم.
+            </div>
+        </div>
+
+        <!-- قسم إضافة التقييمات ورأي الزائر -->
+        <div class="reviews-section">
+            <div class="info-title">⭐ آرائكم وتقييمات المنتجات</div>
+            
+            <div class="add-review-box">
+                <h4 style="color:#fff; margin-bottom:10px;">أضف تقييمك الخاص للمنتج</h4>
+                <form id="user-review-form" onsubmit="handleReviewSubmit(event)">
+                    <div class="star-rating-select" id="star-selector">
+                        <span onclick="setRating(1)">★</span>
+                        <span onclick="setRating(2)">★</span>
+                        <span onclick="setRating(3)">★</span>
+                        <span onclick="setRating(4)">★</span>
+                        <span onclick="setRating(5)">★</span>
+                    </div>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <input type="text" id="reviewer-name" placeholder="اسمك الكريم" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <textarea id="review-comment" rows="3" placeholder="لماذا اخترت هذا التقييم؟ انطباعك عن الجودة..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-add-to-cart" style="width:100%; padding:10px; font-size:1rem;">إرسال التقييم</button>
+                </form>
+
+                <div class="thank-you-msg" id="thank-you-message">
+                    شكراً لك على تقييمك لمشروعنا! نقدّر رأيك ووقتك.
+                </div>
+            </div>
+
+            <div class="user-reviews-list" id="reviews-container">
+                <div class="review-card">
+                    <div class="review-author">ياسين من الدار البيضاء</div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">الجودة ممتازة جداً والتوصيل كان سريعاً في يومين فقط. القطن ثقيل ومناسب للبرد والقصة مضبوطة.</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-author">حمزة من مراكش</div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">الطباعة واضحة وهيبة أسطورية. شكراً DROXILOSHOP على التعامل الراقي!</div>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Footer يضم اللوجو والحقوق فقط -->
     <footer>
         <img src="LOGO.png" alt="DROXILOSHOP Logo" class="footer-logo" onerror="this.style.display='none'">
         <div class="footer-text">© 2026 DROXILOSHOP. جميع الحقوق محفوظة.</div>
     </footer>
 
-    <!-- سكربت تفاعل الصور وتأثير قطرات العيون -->
+    <!-- السكربتات لتفعيل التفاعلات وميزة Zoom-on-Hover وتحكم الريلز -->
     <script>
-        function changeMedia(type, src) {
-            const container = document.getElementById('main-media');
-            if (type === 'image') {
-                container.innerHTML = `<img src="${src}" alt="Main Media">`;
+        // 1. تحكم الريلز (تشغيل، إيقاف، كتم، إلغاء الكتم)
+        const reelVideo = document.getElementById('reel-video');
+        const muteBtn = document.getElementById('mute-btn');
+        const playBtn = document.getElementById('play-btn');
+
+        function toggleMute() {
+            reelVideo.muted = !reelVideo.muted;
+            muteBtn.textContent = reelVideo.muted ? '🔇' : '🔊';
+        }
+
+        function togglePlay() {
+            if (reelVideo.paused) {
+                reelVideo.play();
+                playBtn.textContent = '⏸';
+            } else {
+                reelVideo.pause();
+                playBtn.textContent = '▶';
             }
         }
 
-        function selectSize(size) {
-            document.querySelectorAll('.size-box').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+        // 2. ميزة التكبير عند التمرير (Zoom-on-Hover)
+        const zoomContainer = document.getElementById('zoom-container');
+        const mainImg = document.getElementById('main-product-img');
+
+        zoomContainer.addEventListener('mousemove', (e) => {
+            const rect = zoomContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const xPercent = (x / rect.width) * 100;
+            const yPercent = (y / rect.height) * 100;
+
+            mainImg.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+            mainImg.style.transform = 'scale(2.2)';
+        });
+
+        zoomContainer.addEventListener('mouseleave', () => {
+            mainImg.style.transform = 'scale(1)';
+            mainImg.style.transformOrigin = 'center center';
+        });
+
+        // 3. تغيير الصورة الرئيسية
+        function changeMainImage(src, element) {
+            mainImg.src = src;
+            document.querySelectorAll('.thumb-img').forEach(img => img.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // 4. اختيار المقاس
+        function selectSize(size, element) {
+            document.querySelectorAll('.size-box').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
             document.getElementById('size-select').value = size;
         }
 
+        // 5. نظام تقييم النجوم
+        let selectedRating = 5;
+        function setRating(rating) {
+            selectedRating = rating;
+            const stars = document.querySelectorAll('#star-selector span');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+        setRating(5);
+
+        // 6. إرسال التقييم
+        function handleReviewSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('reviewer-name').value;
+            const comment = document.getElementById('review-comment').value;
+
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.innerHTML = `
+                <div class="review-author">${name}</div>
+                <div class="review-stars">${'★'.repeat(selectedRating)}</div>
+                <div class="review-text">${comment}</div>
+            `;
+
+            document.getElementById('reviews-container').prepend(reviewCard);
+            document.getElementById('user-review-form').reset();
+            setRating(5);
+
+            document.getElementById('thank-you-message').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('thank-you-message').style.display = 'none';
+            }, 5000);
+        }
+
+        // 7. خلفية العيون
         const canvas = document.getElementById('eyes-canvas');
         const ctx = canvas.getContext('2d');
 
