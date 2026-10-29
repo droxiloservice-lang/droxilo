@@ -15,6 +15,7 @@
             --ds-gold: #d4af37;
             --ds-gold-light: #f3e5ab;
             --ds-green: #2ecc71;
+            --ds-red: #e74c3c;
         }
 
         * {
@@ -44,7 +45,7 @@
             opacity: 0.22;
         }
 
-        /* شريط التوصيل ورقم الهاتف */
+        /* شريط الإعلانات والعد التنازلي العلوي */
         .top-announcement-bar {
             background: linear-gradient(135deg, #121212 0%, #1f1f1f 100%);
             color: var(--ds-gold);
@@ -55,6 +56,26 @@
             font-size: 0.88rem;
             font-weight: 700;
             border-bottom: 1px solid var(--ds-border);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-timer-digits {
+            display: flex;
+            gap: 4px;
+            direction: ltr;
+            font-weight: 900;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--ds-gold);
+            color: var(--ds-gold-light);
         }
 
         .phone-contact a {
@@ -104,44 +125,30 @@
             z-index: 2;
         }
 
-        /* شبكة عرض المنتج */
+        /* شبكة عرض المنتج المتوازنة */
         .product-section {
             display: grid;
-            grid-template-columns: 85px 1fr 1fr;
-            gap: 25px;
+            grid-template-columns: 440px 1fr; /* عمود الصور وعمود التفاصيل */
+            gap: 30px;
             background-color: var(--ds-card-bg);
             padding: 30px;
             border-radius: 16px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85);
             border: 1px solid var(--ds-border);
+            align-items: start;
         }
 
-        .thumbnails-col {
+        .left-media-column {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-        }
-
-        .thumb-img {
+            gap: 15px;
             width: 100%;
-            height: 85px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid var(--ds-border);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: #000;
         }
 
-        .thumb-img:hover, .thumb-img.active {
-            border-color: var(--ds-gold);
-            transform: scale(1.03);
-        }
-
-        /* حاوية الصورة الرئيسية مع ميزة الزوم (Zoom-on-Hover) */
+        /* حاوية الصورة الرئيسية مع ميزة الزوم */
         .main-image-container {
             width: 100%;
-            height: 480px;
+            height: 460px;
             border-radius: 10px;
             overflow: hidden;
             border: 2px solid var(--ds-gold);
@@ -160,10 +167,61 @@
             pointer-events: none;
         }
 
+        /* الصور المصغرة تحت الصورة الكبيرة مباشرة وبنفس العرض المتناسق */
+        .thumbnails-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
+        }
+
+        .thumb-img {
+            width: 100%;
+            height: 95px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--ds-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #000;
+        }
+
+        .thumb-img:hover, .thumb-img.active {
+            border-color: var(--ds-gold);
+            transform: scale(1.02);
+        }
+
+        /* بطاقة الضمانات الإضافية تحت الصور */
+        .left-extra-badge {
+            background: rgba(212, 175, 55, 0.04);
+            border: 1px dashed var(--ds-border);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .extra-badge-title {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--ds-gold);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .extra-badge-desc {
+            font-size: 0.8rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
         .details-col {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 14px;
             text-align: right;
         }
 
@@ -185,7 +243,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            margin: 5px 0;
+            margin: 2px 0;
         }
 
         .current-price {
@@ -209,27 +267,54 @@
             border-radius: 6px;
         }
 
+        /* تنبيه المخزون المحدود */
+        .stock-alert {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--ds-red);
+            background: rgba(231, 76, 60, 0.1);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .stock-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--ds-red);
+            border-radius: 50%;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
         .product-desc {
-            font-size: 0.96rem;
+            font-size: 0.92rem;
             color: #e0e0e0;
-            line-height: 1.8;
+            line-height: 1.6;
             background: rgba(255, 255, 255, 0.03);
             border-right: 4px solid var(--ds-gold);
-            padding: 14px;
+            padding: 10px 12px;
             border-radius: 8px;
         }
 
         .sizes-row {
             display: flex;
-            gap: 10px;
-            margin-top: 5px;
+            gap: 8px;
+            margin-top: 4px;
         }
 
         .size-box {
-            padding: 8px 18px;
+            padding: 6px 16px;
             border: 1px solid var(--ds-border);
             border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 700;
             cursor: pointer;
             background: #141414;
@@ -243,21 +328,35 @@
             color: #000;
         }
 
+        .size-help-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #25d366;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .size-help-link:hover {
+            text-decoration: underline;
+        }
+
         .order-form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 5px;
         }
 
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 12px;
             border-radius: 8px;
             border: 1px solid var(--ds-border);
             background-color: #121212;
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             outline: none;
         }
 
@@ -269,9 +368,9 @@
         .btn-add-to-cart {
             background: linear-gradient(135deg, var(--ds-gold) 0%, #aa8c2c 100%);
             color: #000;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 900;
-            padding: 15px;
+            padding: 13px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -285,17 +384,39 @@
             transform: translateY(-2px);
         }
 
-        .shipping-info {
-            display: flex;
-            justify-content: space-around;
-            font-size: 0.85rem;
-            color: var(--ds-text-muted);
-            border-top: 1px solid var(--ds-border);
-            padding-top: 15px;
+        /* شريط أيقونات الثقة تحت نموذج الطلب */
+        .trust-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             margin-top: 10px;
+            border-top: 1px solid var(--ds-border);
+            padding-top: 12px;
         }
 
-        /* قسم التفاصيل، الخامات، وفيديو الريلز التفاعلي الاحترافي */
+        .trust-badge-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--ds-border);
+            border-radius: 8px;
+            padding: 8px 4px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .trust-badge-icon {
+            font-size: 1.1rem;
+        }
+
+        .trust-badge-text {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #dcdcdc;
+        }
+
+        /* قسم التفاصيل والخامات */
         .info-section {
             margin-top: 35px;
             background-color: var(--ds-card-bg);
@@ -318,9 +439,38 @@
 
         .details-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
             align-items: center;
+        }
+
+        .spec-cards-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .spec-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--ds-border);
+            padding: 12px 15px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .spec-card-title {
+            font-size: 0.8rem;
+            color: var(--ds-gold-light);
+            font-weight: 700;
+        }
+
+        .spec-card-value {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #fff;
         }
 
         .features-list {
@@ -332,7 +482,7 @@
             list-style: none;
         }
 
-        /* مشغل الريلز التفاعلي والعمودي الصافي */
+        /* مشغل الريلز */
         .reel-player-wrapper {
             display: flex;
             justify-content: center;
@@ -399,7 +549,7 @@
             border-right: 3px solid var(--ds-green);
         }
 
-        /* قسم التقييمات التفاعلي */
+        /* قسم التقييمات */
         .reviews-section {
             margin-top: 35px;
             background-color: var(--ds-card-bg);
@@ -475,6 +625,30 @@
             color: #dcdcdc;
         }
 
+        /* زر الواتساب العائم */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background-color: #25d366;
+            color: #fff;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
         footer {
             margin-top: 50px;
             background-color: #0d0d0d;
@@ -502,20 +676,19 @@
             .product-section {
                 grid-template-columns: 1fr;
             }
-            .thumbnails-col {
-                flex-direction: row;
-                justify-content: center;
-            }
-            .thumb-img {
-                width: 65px;
-                height: 65px;
+            .thumbnails-row {
+                grid-template-columns: repeat(3, 1fr);
             }
             .details-grid {
                 grid-template-columns: 1fr;
             }
+            .spec-cards-container {
+                grid-template-columns: 1fr;
+            }
             .top-announcement-bar {
                 flex-direction: column;
-                gap: 5px;
+                gap: 8px;
+                text-align: center;
             }
         }
     </style>
@@ -524,10 +697,16 @@
 
     <canvas id="eyes-canvas"></canvas>
 
-    <!-- شريط التوصيل ورقم الهاتف -->
+    <!-- شريط التوصيل مع العد التنازلي المدمج فوق الـ Header -->
     <div class="top-announcement-bar">
-        <span>🚚 التوصيل مجاني لجميع الطلبات في المغرب</span>
-        <span class="phone-contact">للتواصل أو الاستفسار: <a href="tel:0725274491">0725274491</a></span>
+        <span>🚚 توصيل مجاني لجميع الطلبات في المغرب</span>
+        
+        <div class="header-timer">
+            <span>ينتهي العرض خلال:</span>
+            <div class="header-timer-digits" id="header-countdown">05d : 00h : 00m : 00s</div>
+        </div>
+
+        <span class="phone-contact">الواتساب: <a href="https://wa.me/212725274491" target="_blank">0725274491</a></span>
     </div>
 
     <header>
@@ -539,19 +718,29 @@
         
         <div class="product-section">
             
-            <!-- الصور المصغرة -->
-            <div class="thumbnails-col">
-                <img src="LWL.jpg" alt="Thumb 1" class="thumb-img active" onclick="changeMainImage('LWL.jpg', this)">
-                <img src="222.jpg" alt="Thumb 2" class="thumb-img" onclick="changeMainImage('222.jpg', this)">
-                <img src="9TN.jpg" alt="Thumb 3" class="thumb-img" onclick="changeMainImage('9TN.jpg', this)">
+            <!-- العمود الأيسر: الصورة الرئيسية، تحتها الصور المصغرة، وبطاقة الضمان -->
+            <div class="left-media-column">
+                <div class="main-image-container" id="zoom-container">
+                    <img src="LWL.jpg" alt="Toji Fushiguro Oversized Hoodie" id="main-product-img">
+                </div>
+
+                <div class="thumbnails-row">
+                    <img src="LWL.jpg" alt="Thumb 1" class="thumb-img active" onclick="changeMainImage('LWL.jpg', this)">
+                    <img src="222.jpg" alt="Thumb 2" class="thumb-img" onclick="changeMainImage('222.jpg', this)">
+                    <img src="9TN.jpg" alt="Thumb 3" class="thumb-img" onclick="changeMainImage('9TN.jpg', this)">
+                </div>
+
+                <div class="left-extra-badge">
+                    <div class="extra-badge-title">
+                        <span>⭐</span> ضمان الجودة الفاخرة من Droxilo
+                    </div>
+                    <div class="extra-badge-desc">
+                        تم تصميم هذا الهودي خصيصاً ليتحمل الغسيل المتكرر دون أي تأثير على جودة الطباعة أو نعومة القطن الثقيل. نضمن لك رضا تاما أو إمكانية الاستبدال بكل سهولة.
+                    </div>
+                </div>
             </div>
 
-            <!-- حاوية الصورة مع ميزة التكبير عند التمرير (Zoom-on-Hover) -->
-            <div class="main-image-container" id="zoom-container">
-                <img src="LWL.jpg" alt="Toji Fushiguro Oversized Hoodie" id="main-product-img">
-            </div>
-
-            <!-- التفاصيل واستمارة الطلب -->
+            <!-- التفاصيل واستمارة الطلب (العمود الأيمن) -->
             <div class="details-col">
                 <h1 class="product-title">Toji Fushiguro Oversized Hoodie</h1>
                 
@@ -566,12 +755,21 @@
                     <div class="discount-badge">خصم 26%</div>
                 </div>
 
+                <!-- تنبيه المخزون المحدود -->
+                <div class="stock-alert">
+                    <span class="stock-dot"></span>
+                    <span>سارع بالطلب! متبقي 3 قطع فقط في المخزون حالياً.</span>
+                </div>
+
                 <p class="product-desc">
                     هودي فخم مصنوع بقطن ثقيل عالي الجودة 320g وطباعة رقمية ثابتة. قصة أفرسايز مضبوطة ومريحة تمنحك مظهر الأسطورة Toji Fushiguro.
                 </p>
 
                 <div>
-                    <label style="font-size:0.9rem; font-weight:700; color:var(--ds-gold);">اختر المقاس المناسب:</label>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <label style="font-size:0.88rem; font-weight:700; color:var(--ds-gold);">اختر المقاس المناسب:</label>
+                        <a href="https://wa.me/212725274491?text=مرحباً، أحيكم بخصوص استفسار عن مقاسات هودي توجي" target="_blank" class="size-help-link">💬 هل تحتار في مقاسك؟</a>
+                    </div>
                     <div class="sizes-row">
                         <button type="button" class="size-box active" onclick="selectSize('S', this)">S</button>
                         <button type="button" class="size-box" onclick="selectSize('M', this)">M</button>
@@ -605,28 +803,60 @@
                     <button type="submit" class="btn-add-to-cart">تأكيد الطلب الآن 🚀 (الدفع عند الاستلام)</button>
                 </form>
 
-                <div class="shipping-info">
-                    <span>🚚 توصيل مجاني</span>
-                    <span>🔄 إرجاع واستبدال مضمون</span>
-                    <span>💵 الدفع عند الاستلام</span>
+                <!-- شريط أيقونات الثقة -->
+                <div class="trust-badges-grid">
+                    <div class="trust-badge-item">
+                        <span class="trust-badge-icon">🛡️</span>
+                        <span class="trust-badge-text">جودة أصلية 100%</span>
+                    </div>
+                    <div class="trust-badge-item">
+                        <span class="trust-badge-icon">📦</span>
+                        <span class="trust-badge-text">الدفع عند الاستلام</span>
+                    </div>
+                    <div class="trust-badge-item">
+                        <span class="trust-badge-icon">🔄</span>
+                        <span class="trust-badge-text">إرجاع خلال 7 أيام</span>
+                    </div>
                 </div>
+
             </div>
 
         </div>
 
-        <!-- قسم التفاصيل، الخامات، وفيديو الريلز التفاعلي الصافي -->
+        <!-- قسم التفاصيل، الخامات، وفيديو الريلز التفاعلي -->
         <div class="info-section">
-            <div class="info-title">🧵 التفاصيل الفنية، الخامات ومعاينة الريلز</div>
+            <div class="info-title">🧵 مواصفات الخامات والجودة العالية</div>
             
             <div class="details-grid">
-                <ul class="features-list">
-                    <li>✓ قطن خالص ثقيل 100% بنسبة وزن 320g لدفء ومظهر فخم.</li>
-                    <li>✓ طباعة DTF متطورة وعالية الدقة مقاومة للغسيل المتكرر.</li>
-                    <li>✓ تصميم أفرسايز عصري يواكب صيحات الستريتوير العالمية.</li>
-                    <li>✓ خياطة مزدوجة ومتينة للأكمام والخصر لتدوم طويلاً.</li>
-                </ul>
-                
-                <!-- مشغل الريلز التفاعلي العمودي -->
+                <div>
+                    <ul class="features-list">
+                        <li>✓ قطن خالص ثقيل 100% بنسبة وزن 320g لدفء ومظهر فخم.</li>
+                        <li>✓ طباعة DTF متطورة وعالية الدقة مقاومة للغسيل المتكرر.</li>
+                        <li>✓ تصميم أفرسايز عصري يواكب صيحات الستريتوير العالمية.</li>
+                        <li>✓ خياطة مزدوجة ومتينة للأكمام والخصر لتدوم طويلاً.</li>
+                    </ul>
+
+                    <!-- بطاقات الخامات الإضافية -->
+                    <div class="spec-cards-container">
+                        <div class="spec-card">
+                            <span class="spec-card-title">وزن النسيج:</span>
+                            <span class="spec-card-value">320GSM Heavy Cotton</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-card-title">نوع الطباعة:</span>
+                            <span class="spec-card-value">Direct-to-Film (DTF)</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-card-title">نوع القصّة:</span>
+                            <span class="spec-card-value">Oversized Streetwear</span>
+                        </div>
+                        <div class="spec-card">
+                            <span class="spec-card-title">العناية بالقماش:</span>
+                            <span class="spec-card-value">غسيل آلي (30 درجة)</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="reel-player-wrapper">
                     <div class="reel-box" id="reel-container">
                         <video id="reel-video" autoplay muted loop playsinline preload="auto">
@@ -647,7 +877,7 @@
             </div>
         </div>
 
-        <!-- قسم إضافة التقييمات ورأي الزائر -->
+        <!-- قسم التقييمات -->
         <div class="reviews-section">
             <div class="info-title">⭐ آرائكم وتقييمات المنتجات</div>
             
@@ -691,14 +921,39 @@
 
     </div>
 
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/212725274491" target="_blank" class="whatsapp-float" title="تواصل معنا عبر الواتساب">
+        💬
+    </a>
+
     <footer>
         <img src="LOGO.png" alt="DROXILOSHOP Logo" class="footer-logo" onerror="this.style.display='none'">
         <div class="footer-text">© 2026 DROXILOSHOP. جميع الحقوق محفوظة.</div>
     </footer>
 
-    <!-- السكربتات لتفعيل التفاعلات وميزة Zoom-on-Hover وتحكم الريلز -->
     <script>
-        // 1. تحكم الريلز (تشغيل، إيقاف، كتم، إلغاء الكتم)
+        // 1. العد التنازلي التلقائي في شريط الإعلانات العلوي
+        let countdownTime = 5 * 24 * 60 * 60; // 5 أيام بالثواني
+        const timerDisplay = document.getElementById('header-countdown');
+
+        const timerInterval = setInterval(() => {
+            if (countdownTime <= 0) {
+                clearInterval(timerInterval);
+                timerDisplay.textContent = "انتهى العرض!";
+                return;
+            }
+
+            countdownTime--;
+
+            const days = Math.floor(countdownTime / (24 * 3600));
+            const hours = Math.floor((countdownTime % (24 * 3600)) / 3600);
+            const mins = Math.floor((countdownTime % 3600) / 60);
+            const secs = countdownTime % 60;
+
+            timerDisplay.textContent = `${String(days).padStart(2, '0')}d : ${String(hours).padStart(2, '0')}h : ${String(mins).padStart(2, '0')}m : ${String(secs).padStart(2, '0')}s`;
+        }, 1000);
+
+        // 2. تحكم الريلز
         const reelVideo = document.getElementById('reel-video');
         const muteBtn = document.getElementById('mute-btn');
         const playBtn = document.getElementById('play-btn');
@@ -718,7 +973,7 @@
             }
         }
 
-        // 2. ميزة التكبير عند التمرير (Zoom-on-Hover)
+        // 3. ميزة التكبير عند التمرير (Zoom-on-Hover)
         const zoomContainer = document.getElementById('zoom-container');
         const mainImg = document.getElementById('main-product-img');
 
@@ -735,25 +990,25 @@
         });
 
         zoomContainer.addEventListener('mouseleave', () => {
-            mainImg.style.transform = 'scale(1)';
+            mainImg.style.transform = 'scale(1);';
             mainImg.style.transformOrigin = 'center center';
         });
 
-        // 3. تغيير الصورة الرئيسية
+        // 4. تغيير الصورة الرئيسية
         function changeMainImage(src, element) {
             mainImg.src = src;
             document.querySelectorAll('.thumb-img').forEach(img => img.classList.remove('active'));
             element.classList.add('active');
         }
 
-        // 4. اختيار المقاس
+        // 5. اختيار المقاس
         function selectSize(size, element) {
             document.querySelectorAll('.size-box').forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
             document.getElementById('size-select').value = size;
         }
 
-        // 5. نظام تقييم النجوم
+        // 6. نظام تقييم النجوم
         let selectedRating = 5;
         function setRating(rating) {
             selectedRating = rating;
@@ -768,7 +1023,7 @@
         }
         setRating(5);
 
-        // 6. إرسال التقييم
+        // 7. إرسال التقييم
         function handleReviewSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('reviewer-name').value;
@@ -792,7 +1047,7 @@
             }, 5000);
         }
 
-        // 7. خلفية العيون
+        // 8. خلفية العيون
         const canvas = document.getElementById('eyes-canvas');
         const ctx = canvas.getContext('2d');
 
